@@ -10,7 +10,7 @@
     <!-- HEADER -->
     <header>
       <nav class="navigation-menu">
-        <h1>Brasil CNPJ Simples API</h1>
+        <h1>Busca CNPJ Simples API</h1>
       </nav>
     </header>
 
@@ -24,12 +24,12 @@
           integrações e automações em sistemas, sem a necessidade de tokens para
           a autenticação.
         </p>
-        <a
+        <!-- <a
           href="https://github.com/iamhenriquemachado/buscacnpjsimples"
           target="_blank"
           class="button"
           >Ver no GitHub</a
-        >
+        > -->
 
         <!-- SOBRE A API -->
         <section class="section-api">
@@ -40,7 +40,6 @@
             rápidas e simplificadas de informações cadastrais de empresas, sem a
             necessidade de lidar com arquivos massivos.
           </p>
-          <br />
           <p>
             Os dados são atualizados mensalmente, sempre que a Receita Federal
             libera um novo arquivo — geralmente no início de cada mês. Nosso
@@ -48,7 +47,6 @@
             <strong>3 a 4 dias</strong>
             após a publicação oficial.
           </p>
-          <br />
           <p>
             Se preferir, você também pode acessar diretamente os arquivos
             originais da Receita Federal através deste link:
@@ -67,21 +65,34 @@
       <section class="section-api">
         <h3>Como usar</h3>
         <p>Faça requisições HTTP utilizando o CNPJ desejado:</p>
-        <pre>
-GET https://suaapi.com.br/cnpj/00000000000191
-        </pre>
+        <div class="code-label">Requisição</div>
+        <pre>GET https://api-buscacnpjsimples.com.br/cnpj/00000000000191</pre>
 
-        <p>Resposta em JSON:</p>
-        <pre>
-{
-  "cnpj": "00000000000191",
-  "razao_social": "EMPRESA EXEMPLO LTDA",
-  "nome_fantasia": "EMPRESA EXEMPLO",
-  "uf": "SP",
-  "municipio": "São Paulo",
-  "data_abertura": "1995-07-12"
-}
-        </pre>
+        <div class="code-label">Resposta JSON</div>
+        <pre>{
+  <span class="json-key">"cnpj"</span><span class="json-punctuation">:</span> <span class="json-string">"00000000000191"</span><span class="json-punctuation">,</span>
+  <span class="json-key">"razao_social"</span><span class="json-punctuation">:</span> <span class="json-string">"EMPRESA EXEMPLO LTDA"</span><span class="json-punctuation">,</span>
+  <span class="json-key">"nome_fantasia"</span><span class="json-punctuation">:</span> <span class="json-string">"EMPRESA EXEMPLO"</span><span class="json-punctuation">,</span>
+  <span class="json-key">"uf"</span><span class="json-punctuation">:</span> <span class="json-string">"SP"</span><span class="json-punctuation">,</span>
+  <span class="json-key">"municipio"</span><span class="json-punctuation">:</span> <span class="json-string">"São Paulo"</span><span class="json-punctuation">,</span>
+  <span class="json-key">"data_abertura"</span><span class="json-punctuation">:</span> <span class="json-string">"1995-07-12"</span>
+}</pre>
+      </section>
+
+      <!-- TESTE A API -->
+      <section class="api-test">
+        <h3>Teste a API</h3>
+        <p>Digite um CNPJ para consultar as informações:</p>
+        <form class="test-form" id="testForm">
+          <input
+            type="text"
+            id="cnpjInput"
+            placeholder="00000000000191"
+            maxlength="14"
+            pattern="[0-9]*"
+          />
+          <button type="submit">Consultar</button>
+        </form>
       </section>
 
       <section class="section-api">
@@ -110,15 +121,53 @@ GET https://suaapi.com.br/cnpj/00000000000191
         </p>
       </section>
 
-      <!-- BENEFÍCIOS -->
-      <section class="section-api">
-        <h3>Por que usar?</h3>
-        <ul>
-          <li>Open-source e gratuito</li>
-          <li>Base oficial da Receita Federal</li>
-          <li>Fácil de integrar em sistemas</li>
-          <li>Respostas rápidas em JSON</li>
-        </ul>
+      <section class="faq">
+        <h3>Perguntas Frequentes</h3>
+
+        <div class="faq-item">
+          <button class="faq-question">A API é gratuita?</button>
+          <div class="faq-answer">
+            <p>
+              Sim, a API Busca Cnpj Simples é gratuita. Não oferecemos suporte
+              dedicado, pois o projeto é open-source.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Os dados são consultados/atualizados em tempo real?
+          </button>
+          <div class="faq-answer">
+            <p>
+              Não. Os dados são atualizados mensalmente de acordo com a base de
+              dados da Receita Federal do Brasil.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Quanto tempo após a publicação da Receita Federal vocês atualizam a
+            base?
+          </button>
+          <div class="faq-answer">
+            <p>Em média de 2 a 3 dias após a publicação no site oficial.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Existem limites de requisição para o uso da API?
+          </button>
+          <div class="faq-answer">
+            <p>
+              Sim, existe um limite de 50 requisições por IP/segundo. Caso você
+              ultrapasse este limite, iremos aplicar dois bloqueios temporários
+              e no terceiro, seu IP será bloqueado definitivamente.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -126,5 +175,102 @@ GET https://suaapi.com.br/cnpj/00000000000191
     <footer>
       <p>© 2025 Brasil CNPJ Simples. Open-source sob licença MIT.</p>
     </footer>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Resultado da Consulta</h3>
+          <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelectorAll(".faq-question").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const item = btn.parentElement;
+          item.classList.toggle("active");
+        });
+      });
+
+      // Teste da API
+      const testForm = document.getElementById("testForm");
+      const cnpjInput = document.getElementById("cnpjInput");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const modalClose = document.getElementById("modalClose");
+      const modalBody = document.getElementById("modalBody");
+
+      // Permitir apenas números no input
+      cnpjInput.addEventListener("input", (e) => {
+        e.target.value = e.target.value.replace(/\D/g, "");
+      });
+
+      testForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const cnpj = cnpjInput.value.trim();
+
+        if (cnpj.length !== 14) {
+          showModal(
+            '<div class="error-message">Por favor, digite um CNPJ válido com 14 dígitos.</div>'
+          );
+          return;
+        }
+
+        const button = testForm.querySelector("button");
+        button.disabled = true;
+        button.textContent = "Consultando...";
+
+        try {
+          const response = await fetch(`https://suaapi.com.br/cnpj/${cnpj}`);
+          const data = await response.json();
+
+          if (response.ok) {
+            const formattedJson = JSON.stringify(data, null, 2);
+            const highlightedJson = highlightJson(formattedJson);
+            showModal(`<pre>${highlightedJson}</pre>`);
+          } else {
+            showModal(
+              `<div class="error-message">Erro: ${
+                data.message || "CNPJ não encontrado"
+              }</div>`
+            );
+          }
+        } catch (error) {
+          showModal(
+            '<div class="error-message">Erro ao consultar a API. Verifique sua conexão.</div>'
+          );
+        } finally {
+          button.disabled = false;
+          button.textContent = "Consultar";
+        }
+      });
+
+      function highlightJson(json) {
+        return json
+          .replace(
+            /"([^"]+)":/g,
+            '<span class="json-key">"$1"</span><span class="json-punctuation">:</span>'
+          )
+          .replace(/: "([^"]+)"/g, ': <span class="json-string">"$1"</span>')
+          .replace(/([,{}[\]])/g, '<span class="json-punctuation">$1</span>');
+      }
+
+      function showModal(content) {
+        modalBody.innerHTML = content;
+        modalOverlay.classList.add("active");
+      }
+
+      modalClose.addEventListener("click", () => {
+        modalOverlay.classList.remove("active");
+      });
+
+      modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) {
+          modalOverlay.classList.remove("active");
+        }
+      });
+    </script>
   </body>
 </html>
