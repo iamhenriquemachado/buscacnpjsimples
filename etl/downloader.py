@@ -2,20 +2,31 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime 
 import os
+import logging
+
 
 
 def createCnpjDataDirectory():
     os.makedirs('etl/cnpj_data', exist_ok=True)
-    return 'cnpj_data'
+    check_access = os.access('etl/cnpj_data', os.W_OK)
+    if check_access:
+        return 'etl/cnpj_data'
+    else:
+        logging.error("Permission denied. Please, grant access to write in the folder.")
 
-def download_archive(url=None):
+async def download_archive(url=None):
     try:
         cnpj_data_directory = createCnpjDataDirectory()
 
-        current_date = datetime.now().strftime('%Y-%m')
+        current_date = '2025-09' #datetime.now().strftime('%Y-%m')
         base_url = f'https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/{current_date}/'
+
+        check_url_response = requests.get(base_url)
         
-        print(f"Accessing: {base_url}")
+        if check_url_response.status_code != 200:
+            logging.error("The URL is unavailable or does not exists. Please check.")
+        
+        logging.info(f"Accessing: {base_url}")
         response = requests.get(base_url)
         response.raise_for_status()
 
@@ -30,7 +41,7 @@ def download_archive(url=None):
                     continue
 
                 # Build the complete URL
-                if '/' not in href:
+                if '/' not in href and href.endswith('.zip'):
                     file_url = f"{base_url}{href}"
                 else:
                     # Skip if it's a full path

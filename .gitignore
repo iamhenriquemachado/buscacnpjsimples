@@ -6,3 +6,4 @@ api/services/**/__pycache__/
 /cnpj_data
 /.vscode
 **/vscode/
+**/task-list
