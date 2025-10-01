@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 
-/* Import da fonte já no seu CSS externo, você já tem no topo */
-/* @import url('...'); */
-
 :root {
-  /* variáveis de tema — facilita manutenção */
   --color-bg: #f9fafb;
   --color-text: #111827;
   --color-primary: #111827;
@@ -34,6 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  text-align: left; /* garante alinhamento à esquerda como padrão */
 }
 
 /* HEADER */
@@ -49,8 +46,8 @@ header .navigation-menu {
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
-  justify-content: center; /* centraliza horizontalmente */
-  align-items: center;     /* centraliza verticalmente */
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -79,7 +76,7 @@ main {
 .hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  text-align: center;
+  text-align: left; /* antes estava center */
 }
 
 .hero h2 {

@@ -4,3 +4,5 @@ api/services/**/__pycache__/
 **/__pycache__/
 **/cnpj_data/
 /cnpj_data
+/.vscode
+**/vscode/
