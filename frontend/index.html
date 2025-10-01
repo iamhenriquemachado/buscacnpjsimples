@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Brasil CNPJ Simples - API</title>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <nav class="navigation-menu">
+        <h1>Brasil CNPJ Simples API</h1>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <h2>Consulta de CNPJs simplificada</h2>
+        <p>
+          A <strong>Brasil CNPJ Simples</strong> é uma API pública e open-source
+          para consultas rápidas de CNPJs da Receita Federal. Ideal para
+          integrações e automações em sistemas.
+        </p>
+        <a
+          href="https://github.com/iamhenriquemachado/buscacnpjsimples"
+          target="_blank"
+          class="button"
+          >Ver no GitHub</a
+        >
+
+        <!-- SOBRE A API -->
+        <section class="section-api">
+          <h3>Sobre a API</h3>
+          <p>
+            A <strong>Brasil CNPJ Simples</strong> utiliza a base pública de
+            CNPJs disponibilizada pela Receita Federal, permitindo consultas
+            rápidas e simplificadas de informações cadastrais de empresas, sem a
+            necessidade de lidar com arquivos massivos.
+          </p>
+          <br />
+          <p>
+            Os dados são atualizados mensalmente, sempre que a Receita Federal
+            libera um novo arquivo — geralmente no início de cada mês. Nosso
+            processo de atualização garante que a API esteja sincronizada em até
+            <strong>3 a 4 dias</strong>
+            após a publicação oficial.
+          </p>
+          <br />
+          <p>
+            Se preferir, você também pode acessar diretamente os arquivos
+            originais da Receita Federal através deste link:
+            <a
+              href="https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Base de Dados - Receita Federal </a
+            >.
+          </p>
+        </section>
+      </section>
+
+      <!-- COMO USAR -->
+      <section class="section-api">
+        <h3>Como usar</h3>
+        <p>Faça requisições HTTP utilizando o CNPJ desejado:</p>
+        <pre>
+GET https://suaapi.com.br/cnpj/00000000000191
+        </pre>
+
+        <p>Resposta em JSON:</p>
+        <pre>
+{
+  "cnpj": "00000000000191",
+  "razao_social": "EMPRESA EXEMPLO LTDA",
+  "nome_fantasia": "EMPRESA EXEMPLO",
+  "uf": "SP",
+  "municipio": "São Paulo",
+  "data_abertura": "1995-07-12"
+}
+        </pre>
+      </section>
+
+      <section class="section-api">
+        <h3>Como a API foi Construída</h3>
+
+        <p>
+          <strong>Pipeline ETL:</strong> Pipeline automatizado que extrai dados
+          da Receita Federal, converte para formato Parquet (otimizado para
+          processamento) e carrega em PostgreSQL. Arquitetura modular em Python
+          com componentes especializados: <code>downloader.py</code>,
+          <code>processor.py</code>, <code>parquet_converter.py</code> e
+          <code>database.py</code>.
+        </p>
+        <br />
+        <p>
+          <strong>Stack Tecnológica:</strong> FastAPI + Python 3.11, PostgreSQL,
+          Docker e VPS. Documentação automática via Swagger, código versionado
+          no GitHub para total transparência e contribuições open-source.
+        </p>
+        <br />
+        <p>
+          <strong>Processo de Atualização:</strong> Atualização mensal
+          automatizada via cron scheduler, com janela de 4 dias após publicação
+          da Receita Federal. O sistema detecta, processa e atualiza os dados
+          sem intervenção manual.
+        </p>
+      </section>
+
+      <!-- BENEFÍCIOS -->
+      <section class="section-api">
+        <h3>Por que usar?</h3>
+        <ul>
+          <li>Open-source e gratuito</li>
+          <li>Base oficial da Receita Federal</li>
+          <li>Fácil de integrar em sistemas</li>
+          <li>Respostas rápidas em JSON</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2025 Brasil CNPJ Simples. Open-source sob licença MIT.</p>
+    </footer>
+  </body>
+</html>

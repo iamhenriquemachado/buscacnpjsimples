@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
+/* Import da fonte já no seu CSS externo, você já tem no topo */
+/* @import url('...'); */
+
+:root {
+  /* variáveis de tema — facilita manutenção */
+  --color-bg: #f9fafb;
+  --color-text: #111827;
+  --color-primary: #111827;
+  --color-primary-light: #374151;
+  --color-contrast: #ffffff;
+  --color-green-standard: #009866
+
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+
+  --max-width: 800px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "IBM Plex Mono", monospace;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* HEADER */
+/* HEADER */
+header {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-contrast);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header .navigation-menu {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;     /* centraliza verticalmente */
+  text-align: center;
+}
+
+header .navigation-menu h1 {
+  font-size: 1.75rem;
+  color: #009866
+}
+
+header .logo img {
+  height: 48px;
+  width: auto;
+}
+
+header .logo h1 {
+  font-size: 1.75rem;
+  color: #009866
+}
+
+/* MAIN / SEÇÕES */
+main {
+  flex: 1;
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2.25rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.hero p {
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* botão/link principal */
+.hero .button {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #009866;
+  color: var(--color-contrast);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  
+}
+
+.hero .button:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* SEÇÃO de uso da API / exemplos */
+.section-api {
+  margin-top: var(--spacing-lg);
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--color-contrast);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.section-api h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+}
+
+.section-api pre {
+  background-color: #f3f4f6;
+  padding: var(--spacing-sm);
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.95rem;
+  margin-bottom: var(--spacing-md);
+}
+
+/* FOOTER */
+footer {
+  width: 100%;
+  background-color: var(--color-contrast);
+  padding: var(--spacing-md);
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  header .logo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header .logo h1 {
+    font-size: 1.5rem;
+  }
+  .hero h2 {
+    font-size: 1.75rem;
+  }
+  .section-api {
+    padding: var(--spacing-md);
+  }
+}

@@ -5,7 +5,7 @@ import os
 
 
 def createCnpjDataDirectory():
-    os.makedirs('cnpj_data', exist_ok=True)
+    os.makedirs('etl/cnpj_data', exist_ok=True)
     return 'cnpj_data'
 
 def download_archive(url=None):
