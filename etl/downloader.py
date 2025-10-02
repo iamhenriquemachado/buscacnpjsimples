@@ -1,77 +1,79 @@
-import requests
+import asyncio
 from bs4 import BeautifulSoup
-from datetime import datetime 
+from datetime import datetime
 import os
 import logging
+import httpx
+import aiofiles
 
+logging.basicConfig(level=logging.INFO)
 
 
 def createCnpjDataDirectory():
-    os.makedirs('etl/cnpj_data', exist_ok=True)
-    check_access = os.access('etl/cnpj_data', os.W_OK)
+    path = 'cnpj_data'
+    os.makedirs(path, exist_ok=True)
+    check_access = os.access(path, os.W_OK)
     if check_access:
-        return 'etl/cnpj_data'
+        return path
     else:
-        logging.error("Permission denied. Please, grant access to write in the folder.")
+        logging.error("Permission denied. Please grant write access to the folder.")
+        return None
 
-async def download_archive(url=None):
+
+async def download_file_async(file_url, file_path, client):
     try:
-        cnpj_data_directory = createCnpjDataDirectory()
+        async with client.stream("GET", file_url) as response:
+            response.raise_for_status()
+            async with aiofiles.open(file_path, 'wb') as f:
+                async for chunk in response.aiter_bytes(chunk_size=8192):
+                    if chunk:
+                        await f.write(chunk)
+        logging.info(f"✅ Downloaded: {file_path} ({os.path.getsize(file_path)} bytes)")
+    except httpx.RequestError as e:
+        logging.error(f"Error downloading {file_url}: {e}")
 
-        current_date = '2025-09' #datetime.now().strftime('%Y-%m')
-        base_url = f'https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/{current_date}/'
 
-        check_url_response = requests.get(base_url)
-        
-        if check_url_response.status_code != 200:
-            logging.error("The URL is unavailable or does not exists. Please check.")
-        
+async def download_all_async():
+    cnpj_data_directory = createCnpjDataDirectory()
+    if not cnpj_data_directory:
+        return None
+
+    current_date = '2025-09'  # datetime.now().strftime('%Y-%m')
+    base_url = f'https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/{current_date}/'
+
+    async with httpx.AsyncClient(timeout=None) as client:
+        # Verifica se a URL principal está disponível
+        try:
+            response = await client.get(base_url)
+            response.raise_for_status()
+        except httpx.RequestError as e:
+            logging.error(f"The URL {base_url} is unavailable: {e}")
+            return None
+
         logging.info(f"Accessing: {base_url}")
-        response = requests.get(base_url)
-        response.raise_for_status()
+        html = response.text
+        soup = BeautifulSoup(html, "html.parser")
 
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, "html.parser")
+        # Construir lista de tarefas para downloads
+        tasks = []
+        for link in soup.find_all('a'):
+            href = link.get("href")
 
-            for link in soup.find_all('a'): 
-                href = link.get("href")
+            if not href or href == '../' or href.startswith('?') or href.startswith('/'):
+                continue
 
-                # Skip empty, parent directory, and query links
-                if not href or href == '../' or href.startswith('?') or href.startswith('/'):
-                    continue
+            if '/' not in href and href.endswith('.zip'):
+                file_url = f"{base_url}{href}"
+                file_path = os.path.join(cnpj_data_directory, href)
+                tasks.append(download_file_async(file_url, file_path, client))
 
-                # Build the complete URL
-                if '/' not in href and href.endswith('.zip'):
-                    file_url = f"{base_url}{href}"
-                else:
-                    # Skip if it's a full path
-                    continue
-                
-                filename = href
-                file_path = os.path.join(cnpj_data_directory, filename)
+        if tasks:
+            # Executa downloads em paralelo
+            await asyncio.gather(*tasks)
 
-                print(f"Downloading: {filename}")
-                print(f"From URL: {file_url}")
-
-                file_response = requests.get(file_url, stream=True)
-                file_response.raise_for_status()
-
-                with open(file_path, 'wb') as file:
-                    for chunk in file_response.iter_content(chunk_size=8192):
-                        if chunk:
-                            file.write(chunk)
-                
-                print(f"✓ Downloaded: {filename} ({os.path.getsize(file_path)} bytes)\n")
-            
-            print("All files downloaded successfully!")
-            return cnpj_data_directory
-        
-    except requests.exceptions.RequestException as e:
-        print(f"Error while downloading file: {e}")
-        return None
-    except Exception as e:
-        print(f"Unexpected error: {e}")
-        return None
+    logging.info("All files downloaded successfully!")
+    return cnpj_data_directory
 
 
-download_archive()
+if __name__ == "__main__":
+    asyncio.run(download_all_async())
