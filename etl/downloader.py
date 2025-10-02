@@ -34,7 +34,7 @@ async def download_file_async(file_url, file_download_dir, client):
                 async for chunk in response.aiter_bytes(chunk_size=65536):
                     if chunk:
                         await f.write(chunk)
-        logging.info(f"✅ Downloaded: {file_download_dir} ({os.download_dir.getsize(file_download_dir)} bytes)")
+        logging.info(f"✅ Downloaded: {file_download_dir} ({os.path.getsize(file_download_dir)} bytes)")
     except httpx.RequestError as e:
         logging.error(f"Error downloading {file_url}: {e}")
 
@@ -72,9 +72,9 @@ async def download_all_async():
 
             if '/' not in href and href.endswith('.zip'):
                 file_url = f"{base_url}{href}"
-                file_download_dir = os.download_dir.join(cnpj_data_directory, href)
+                file_download_dir = os.path.join(cnpj_data_directory, href)
 
-                if os.download_dir.exists(file_download_dir):
+                if os.path.exists(file_download_dir):
                     logging.info(f"⚠️ The file {href} already exists in the download_dir {file_download_dir}. The next file will be verified and downloaded.")
                     continue
 
