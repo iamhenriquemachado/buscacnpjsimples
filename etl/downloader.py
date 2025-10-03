@@ -127,7 +127,5 @@ async def download_all_async():
         return cnpj_data_directory
 
 
-# if __name__ == "__main__":
-#     asyncio.run(download_all_async())
-
-extractFilesAsync('etl/downloads', 'extract')
+if __name__ == "__main__":
+    asyncio.run(download_all_async())
