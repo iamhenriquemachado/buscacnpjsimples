@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 :root {
   --color-bg: #f3f4f6;
@@ -7,12 +7,25 @@
   --color-primary-light: #374151;
   --color-contrast: #ffffff;
   --color-green-standard: #009866;
+  --color-border: #e5e7eb;
+  --color-code-bg: #1f2937;
+  --color-shadow: rgba(0,0,0,0.05);
 
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
-
   --max-width: 800px;
+}
+
+[data-theme="dark"] {
+  --color-bg: #111827;
+  --color-text: #f9fafb;
+  --color-primary: #f9fafb;
+  --color-primary-light: #d1d5db;
+  --color-contrast: #1f2937;
+  --color-border: #374151;
+  --color-code-bg: #0f172a;
+  --color-shadow: rgba(0,0,0,0.3);
 }
 
 * {
@@ -22,13 +35,14 @@
 }
 
 body {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* HEADER */
@@ -36,21 +50,40 @@ header {
   width: 100%;
   padding: var(--spacing-md);
   background-color: var(--color-contrast);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px var(--color-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 header .navigation-menu {
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
 }
 
 header .navigation-menu h1 {
   font-size: 1.75rem;
   color: #009866;
+}
+
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-bg);
+  transform: scale(1.05);
 }
 
 header .logo img {
@@ -95,7 +128,7 @@ main {
   display: inline-block;
   text-decoration: none;
   background-color: #009866;
-  color: var(--color-contrast);
+  color: #ffffff;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   transition: background-color 0.3s ease;
@@ -103,7 +136,7 @@ main {
 }
 
 .hero .button:hover {
-  background-color: var(--color-primary-light);
+  background-color: #007a52;
 }
 
 /* LAYOUT EM CARD PARA TODAS AS SEÇÕES */
@@ -116,8 +149,9 @@ main {
   padding: var(--spacing-md);
   background-color: var(--color-contrast);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 4px var(--color-shadow);
+  transition: all 0.3s ease;
 }
 
 .section-api h3,
@@ -130,18 +164,33 @@ main {
   text-align: center;
 }
 
+.section-api p,
+.api-test p {
+  margin-bottom: 1rem;
+}
+
+.section-api a {
+  color: #009866;
+  text-decoration: underline;
+}
+
+.section-api a:hover {
+  color: #007a52;
+}
+
 /* SEÇÃO DE USO DA API / exemplos */
 .section-api pre {
-  background-color: #1f2937;
+  background-color: var(--color-code-bg);
   color: #f9fafb;
   padding: var(--spacing-sm);
   border-radius: 8px;
   overflow-x: auto;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   margin-bottom: var(--spacing-md);
   border: 1px solid #374151;
   line-height: 1.6;
+  transition: background-color 0.3s ease;
 }
 
 .section-api .code-label {
@@ -175,11 +224,13 @@ main {
 .test-form input {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .test-form input:focus {
@@ -190,10 +241,10 @@ main {
 .test-form button {
   padding: 0.75rem 1.5rem;
   background-color: #009866;
-  color: var(--color-contrast);
+  color: #ffffff;
   border: none;
   border-radius: 8px;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -228,7 +279,7 @@ main {
   display: inline-block;
   text-decoration: none;
   background-color: #009866;
-  color: var(--color-contrast);
+  color: #ffffff;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   transition: background-color 0.3s ease;
@@ -243,7 +294,7 @@ main {
 }
 
 .pix-button:hover {
-  background-color: var(--color-primary-light);
+  background-color: #007a52;
 }
 
 .coffee-button:hover {
@@ -254,12 +305,14 @@ main {
   margin-top: 1rem;
   color: #009866;
   font-weight: 600;
+  text-align: center;
 }
 
 /* FAQ */
 .faq-item {
   margin-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
+  transition: border-color 0.3s ease;
 }
 
 .faq-question {
@@ -298,7 +351,8 @@ footer {
   background-color: var(--color-contrast);
   padding: var(--spacing-md);
   text-align: center;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--color-border);
+  transition: all 0.3s ease;
 }
 
 footer p {
@@ -308,12 +362,18 @@ footer p {
 
 /* RESPONSIVIDADE */
 @media (max-width: 600px) {
+  header .navigation-menu {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   header .logo {
     flex-direction: column;
     align-items: flex-start;
   }
   
-  header .logo h1 {
+  header .logo h1,
+  header .navigation-menu h1 {
     font-size: 1.5rem;
   }
   
