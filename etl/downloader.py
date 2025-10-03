@@ -5,13 +5,15 @@ import os
 import logging
 import httpx
 import aiofiles
+import zipfile
+
 
 logging.basicConfig(level=logging.INFO)
 
 
-def createDownloadAndExtractionDirectories():
-    download_dir = 'downloads'
-    extract_dir = 'extract'
+def createDownloadAndExtractionDirectory():
+    download_dir = 'etl/downloads'
+    extract_dir = 'etl/extract'
 
     os.makedirs(download_dir, exist_ok=True)
     os.makedirs(extract_dir, exist_ok=True)
@@ -22,25 +24,59 @@ def createDownloadAndExtractionDirectories():
     if check_acces_download_dir and check_acces_extract_dir:
         return download_dir
     else:
-        logging.error("Permission denied. Please grant write access to the folder.")
+        logging.error(f"Permission denied to the directories {download_dir, extract_dir}.")
         return None
 
 
 async def download_file_async(file_url, file_download_dir, client):
-    try:
-        async with client.stream("GET", file_url) as response:
-            response.raise_for_status()
-            async with aiofiles.open(file_download_dir, 'wb') as f:
-                async for chunk in response.aiter_bytes(chunk_size=65536):
-                    if chunk:
-                        await f.write(chunk)
-        logging.info(f"✅ Downloaded: {file_download_dir} ({os.path.getsize(file_download_dir)} bytes)")
-    except httpx.RequestError as e:
-        logging.error(f"Error downloading {file_url}: {e}")
+    max_attempts = 5
+    attempts = 0
 
+    while attempts < max_attempts:
+        try:
+            async with client.stream("GET", file_url) as response:
+                response.raise_for_status()  # Raise error if >= 400
+
+                async with aiofiles.open(file_download_dir, 'wb') as f:
+                    async for chunk in response.aiter_bytes(chunk_size=65536):
+                        if chunk:
+                            await f.write(chunk)
+
+            # Check if the file is downloaded
+            if os.path.exists(file_download_dir) and os.path.getsize(file_download_dir) > 0:
+                logging.info(f"✅ Downloaded: {file_download_dir} ({os.path.getsize(file_download_dir)} bytes)")
+                return True  
+            else:
+                logging.warning(f"⚠️ File {file_download_dir} is empty or corrupted. Retrying...")
+
+        except (httpx.RequestError, httpx.HTTPStatusError) as e:
+            logging.error(f"❌ Error downloading {file_url} on attempt {attempts + 1}: {e}")
+
+        # Retry logic
+        attempts += 1
+        if attempts < max_attempts:
+            wait_time = 2 ** attempts 
+            logging.info(f"🔄 Retrying in {wait_time}s... (Attempt {attempts}/{max_attempts})")
+            await asyncio.sleep(wait_time)
+
+    logging.error(f"❌ Failed to download {file_url} after {max_attempts} attempts")
+    return False
+
+
+
+def extractFilesAsync(download_path, extract_path):
+    try:
+        with zipfile.ZipFile(download_path, 'r') as zip:
+            zip.extractall(extract_path)
+            logging.info(f'The file {download_path} was extracted to {extract_path} directory.')
+
+    except FileNotFoundError as e:
+        logging.error(f'The file was not found: {e}')
+    except Exception as e:
+        logging(f'An exception ocurred: {e}')
 
 async def download_all_async():
-    cnpj_data_directory = createDownloadAndExtractionDirectories()
+    cnpj_data_directory = createDownloadAndExtractionDirectory()
     if not cnpj_data_directory:
         return None
 
@@ -86,8 +122,12 @@ async def download_all_async():
         
 
         logging.info("All files downloaded successfully!")
+        extractFilesAsync(file_download_dir, extract_path='extract')
+
         return cnpj_data_directory
 
 
-if __name__ == "__main__":
-    asyncio.run(download_all_async())
+# if __name__ == "__main__":
+#     asyncio.run(download_all_async())
+
+extractFilesAsync('etl/downloads', 'extract')

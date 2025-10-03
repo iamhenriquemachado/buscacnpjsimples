@@ -6,4 +6,3 @@ api/services/**/__pycache__/
 /downloads
 /.vscode
 **/vscode/
-**/task-list
