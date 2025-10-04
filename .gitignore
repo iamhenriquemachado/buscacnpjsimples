@@ -6,3 +6,6 @@ api/services/**/__pycache__/
 /downloads
 /.vscode
 **/vscode/
+/__downloads__
+/__extract__
+**/extract

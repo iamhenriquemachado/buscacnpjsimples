@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 :root {
   --color-bg: #f3f4f6;
@@ -35,7 +35,7 @@
 }
 
 body {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", monospace;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
@@ -60,6 +60,9 @@ header .navigation-menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+
+
 }
 
 header .navigation-menu h1 {
@@ -94,7 +97,6 @@ header .logo img {
 header .logo h1 {
   font-size: 1.75rem;
   color: #009866;
-  text-align: center;
 }
 
 /* MAIN / SEÇÕES */
@@ -114,6 +116,7 @@ main {
   font-size: 2.25rem;
   margin-bottom: var(--spacing-md);
   color: var(--color-primary);
+  text-align: center;
 }
 
 .hero p {
@@ -121,6 +124,7 @@ main {
   margin-bottom: var(--spacing-lg);
   color: var(--color-text);
   line-height: 1.6;
+  text-align: center;
 }
 
 /* botão/link principal */
@@ -133,6 +137,7 @@ main {
   border-radius: 8px;
   transition: background-color 0.3s ease;
   font-weight: 500;
+  align-content: center;
 }
 
 .hero .button:hover {
@@ -185,7 +190,7 @@ main {
   padding: var(--spacing-sm);
   border-radius: 8px;
   overflow-x: auto;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", monospace;
   font-size: 0.9rem;
   margin-bottom: var(--spacing-md);
   border: 1px solid #374151;
@@ -226,7 +231,7 @@ main {
   padding: 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", monospace;
   font-size: 1rem;
   transition: all 0.3s ease;
   background-color: var(--color-bg);
@@ -244,7 +249,7 @@ main {
   color: #ffffff;
   border: none;
   border-radius: 8px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Inter", monospace;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
