@@ -1,5 +1,6 @@
 import pandas as pd
-import pyarrow
+import pyarrow as pa
+import pyarrow.parquet as pq
 import os 
 import logging
 from datetime import datetime
@@ -33,5 +34,15 @@ def create_parquet_dirs():
         logging.info(f"❌ Erro ao criar diretório {parquet_dir}")
         return None
 
+def convert_csv_to_parquet():
+    list_csv_files = list_all_csv_files()
+
+    if not list_all_csv_files:
+        return None
+    
+    with open('etl/extract/F.K03200$Z.D50913.PAISCSV', 'r') as f:
+        content = f.read()
+        print(content)
+
 if __name__ == "__main__":
-    create_parquet_dirs()
+    convert_csv_to_parquet()
