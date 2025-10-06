@@ -11,8 +11,8 @@ logging.basicConfig(level=logging.INFO)
 
 
 def create_download_and_extraction_dirs():
-    download_dir = 'etl/downloads'
-    extract_dir = 'etl/extract'
+    download_dir = 'backend/etl/downloads'
+    extract_dir = 'backend/etl/extract'
 
     os.makedirs(download_dir, exist_ok=True)
     os.makedirs(extract_dir, exist_ok=True)

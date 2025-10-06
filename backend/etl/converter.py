@@ -70,7 +70,7 @@ def convert_csv_to_parquet():
                 logging.info("🔄 Convertendo para o formato Parquet...")
                 table = pa.Table.from_pandas(df)
                 
-                parquet_filename = filename.replace('.csv', '.parquet')
+                parquet_filename = filename.replace('CSV', '.parquet')
                 parquet_file_path = os.path.join(parquet_dir, parquet_filename)
                 
                 pq.write_table(table, parquet_file_path, compression='snappy')
