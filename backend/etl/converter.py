@@ -45,11 +45,13 @@ def convert_csv_to_parquet():
     try:
         extract_dir = 'backend/etl/extract/'
         parquet_dir = 'backend/etl/parquet/'
-        
+
         converted_files = []
+
+        ##remove_download_dir = os.remove('backend/etl/downloads')
         
         for filename in os.listdir(extract_dir):
-            if filename.endswith('.csv'):
+            if filename.__contains__('CSV'):
                 file_path = os.path.join(extract_dir, filename)
                 
                 logging.info(f"📄 Lendo o arquivo CSV: '{file_path}'...")
@@ -64,8 +66,8 @@ def convert_csv_to_parquet():
                     dtype=str 
                 )
                 
-                logging.info("⚙️  Normalizando os dados de texto...")
-                df = df.applymap(clean_text)
+                #logging.info("⚙️  Normalizando os dados de texto...")
+               # df = df.map(clean_text)
                 
                 logging.info("🔄 Convertendo para o formato Parquet...")
                 table = pa.Table.from_pandas(df)
@@ -98,4 +100,5 @@ def convert_csv_to_parquet():
 
 # Executar programa 
 if __name__ == "__main__":
+     create_parquet_dirs()
      convert_csv_to_parquet()
