@@ -5,6 +5,7 @@ import os
 import logging
 import httpx
 import aiofiles
+from utils import normalize_csv_filenames
 import zipfile
 
 logging.basicConfig(level=logging.INFO)
@@ -121,6 +122,7 @@ async def download_all_async():
                 await asyncio.to_thread(extract_file, file_path, extract_dir)
 
         logging.info("✅ All downloads and extractions finished!")
+        normalize_csv_filenames()
         return download_dir
 
 
