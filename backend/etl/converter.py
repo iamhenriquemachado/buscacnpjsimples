@@ -1,31 +1,19 @@
-import os 
+import os
 import logging
 import ftfy
 import unicodedata
 import duckdb
+import re
 from pathlib import Path
-
-logging.basicConfig(level=logging.INFO)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def create_parquet_dirs():
     parquet_dir = 'backend/etl/parquet'
-    
-    # Verifica se o diretório já existe
-    if os.path.exists(parquet_dir):
-        logging.info(f"✔️  O diretório '{parquet_dir}' já existe.")
-        return parquet_dir
-        
-    # Tenta criar o diretório
     try:
-        logging.info(f"⚙️  Criando o diretório '{parquet_dir}'...")
-        os.makedirs(parquet_dir, exist_ok=True)
-        
-        # Verifica se a criação foi bem-sucedida
-        if os.access(parquet_dir, os.W_OK):
-            logging.info(f"✅ Diretório '{parquet_dir}' criado com sucesso.")
-            return parquet_dir
+        Path(parquet_dir).mkdir(parents=True, exist_ok=True)
+        logging.info(f"📂 Diretório '{parquet_dir}' verificado/criado com sucesso.")
+        return parquet_dir
     except Exception as e:
         logging.error(f"❌ Erro ao criar diretório '{parquet_dir}': {e}")
         return None
@@ -38,87 +26,101 @@ def clean_text(text):
     return text
 
 
+def sanitize_filename(filename):
+    """
+    Renomeia o arquivo CSV de entrada para um nome Parquet limpo e padronizado.
+    Ex: 'K3241.K03200Y1.D50913.EMPRECSV' -> 'Empresas1.parquet'
+    """
+    # Mapeamento dos identificadores para os nomes finais desejados
+    name_map = {
+        'SIMPLES': 'Simples',
+        'CNAECSV': 'Cnaes',
+        'MOTICSV': 'Motivos',
+        'MUNICCSV': 'Municipios',
+        'NATJUCSV': 'Naturezas',
+        'PAISCSV': 'Paises',
+        'QUALSCSV': 'Qualificacoes',
+        'EMPRECSV': 'Empresas',
+        'ESTABELE': 'Estabelecimentos',
+        'SOCIOCSV': 'Socios'
+    }
+
+    for key, new_name in name_map.items():
+        if key in filename:
+            match = re.search(r'Y(\d)', filename)
+            number_suffix = match.group(1) if match else ''
+            
+            return f"{new_name}{number_suffix}.parquet"
+            
+    logging.warning(f"⚠️ Padrão de nome não reconhecido para '{filename}'.")
+
+    clean_name = filename.split('.')[0].replace('$', '_').replace('.', '_')
+    return f"arquivo_{clean_name}.parquet"
+
+
 def convert_csv_to_parquet():
     try:
         extract_dir = 'backend/etl/extract/'
-        parquet_dir = 'backend/etl/parquet/'
+        parquet_dir = create_parquet_dirs()
         
-        # Criar diretório de destino se não existir
-        Path(parquet_dir).mkdir(parents=True, exist_ok=True)
-        
-        converted_files = []
-        
-        # Criar conexão persistente com configurações otimizadas
-        conn = duckdb.connect()
-        
-        # Otimizações de performance
-        conn.execute("SET threads TO 8;")  
-        conn.execute("SET memory_limit = '8GB';")  
-        conn.execute("SET temp_directory = '/tmp/duckdb_temp';")  
-        
-        # Listar arquivos CSV uma vez
-        csv_files = [f for f in os.listdir(extract_dir) if 'CSV' in f]
+        csv_files = [
+            f for f in os.listdir(extract_dir)
+            if 'csv' in f.lower() and os.path.isfile(os.path.join(extract_dir, f))
+]
         total_files = len(csv_files)
         
         if not csv_files:
             logging.warning("⚠️ Nenhum arquivo CSV encontrado para converter.")
-            return None
+            return
         
-        logging.info(f"📁 Encontrados {total_files} arquivo(s) CSV para converter")
+        logging.info(f"📁 Encontrados {total_files} arquivo(s) CSV para converter.")
+        
+        conn = duckdb.connect()
+        conn.execute("SET threads TO 8;")
+        conn.execute("SET memory_limit = '8GB';")
+        conn.execute("SET temp_directory = '/tmp/duckdb_temp';")
+        
+        converted_files = []
         
         for idx, filename in enumerate(csv_files, 1):
             csv_path = os.path.join(extract_dir, filename)
-            parquet_name = filename.rsplit('.', 1)[0] + ".parquet"
+            parquet_name = sanitize_filename(filename)
             parquet_path = os.path.join(parquet_dir, parquet_name)
             
-            logging.info(f"⚙️ [{idx}/{total_files}] Convertendo '{filename}' → '{parquet_name}'")
-            
-            conn.execute(f"""
-                COPY (
-                    SELECT * FROM read_csv(
-                        '{csv_path}',
-                        delim=';',
-                        header=FALSE,
-                        encoding='CP1252',
-                        quote='"',
-                        ignore_errors=TRUE,
-                        parallel=TRUE,
-                        buffer_size=262144,
-                        sample_size=500000
+            try:
+                logging.info(f"⚙️ [{idx}/{total_files}] Convertendo '{filename}' → '{parquet_name}'")
+                
+                conn.execute(f"""
+                    COPY (
+                        SELECT * FROM read_csv_auto(
+                            '{csv_path}',
+                            delim=';',
+                            header=TRUE,
+                            ignore_errors=TRUE,
+                            encoding='CP1252'
+                        )
                     )
-                )
-                TO '{parquet_path}' (
-                    FORMAT PARQUET,
-                    COMPRESSION 'ZSTD',
-                    ROW_GROUP_SIZE 122880
-                );
-            """)
+                    TO '{parquet_path}' (
+                        FORMAT PARQUET,
+                        COMPRESSION 'ZSTD'
+                    );
+                """)
+                
+                converted_files.append(parquet_path)
+                logging.info(f"✅ [{idx}/{total_files}] '{parquet_name}' salvo com sucesso.")
             
-            logging.info(f"✅ [{idx}/{total_files}] Arquivo '.parquet' convertido e salvo em '{parquet_path}'")
-            converted_files.append(parquet_path)
+            except Exception as e:
+                logging.error(f"❌ Erro ao converter '{filename}': {e}")
+                continue
         
-        # Fechar conexão
         conn.close()
-        
-        if converted_files:
-            logging.info(f"🎉 {len(converted_files)} arquivo(s) convertido(s) com sucesso!")
-            return converted_files
-        else:
-            logging.warning("⚠️ Nenhum arquivo processado.")
-            return None
-                    
-    except FileNotFoundError as e:
-        logging.error(f"❌ Erro: Diretório não encontrado - {e}")
-        return None
+        logging.info(f"🎉 Conversão concluída! {len(converted_files)} arquivo(s) convertido(s).")
+        return converted_files
+
     except Exception as e:
-        logging.error(f"❌ Erro ao converter arquivos: {e}")
+        logging.error(f"❌ Erro geral: {e}")
         return None
 
 
-
-
-
-# Executar programa 
 if __name__ == "__main__":
-     create_parquet_dirs()
-     convert_csv_to_parquet()
+    convert_csv_to_parquet()
