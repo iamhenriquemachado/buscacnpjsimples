@@ -9,3 +9,5 @@ api/services/**/__pycache__/
 /__downloads__
 /__extract__
 **/extract
+/__parquet__
+**/parquet
