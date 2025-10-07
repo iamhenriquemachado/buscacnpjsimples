@@ -1,6 +1,3 @@
-import pandas as pd
-import pyarrow as pa
-import pyarrow.parquet as pq
 import os 
 import logging
 import ftfy
@@ -13,7 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def create_parquet_dirs():
-    """Cria o diretório de destino para os arquivos Parquet, se não existir."""
     parquet_dir = 'backend/etl/parquet'
     
     # Verifica se o diretório já existe
@@ -41,11 +37,6 @@ def clean_text(text):
         return unicodedata.normalize('NFC', text_fixed)
     return text
 
-
-import os
-import logging
-import duckdb
-from pathlib import Path
 
 def convert_csv_to_parquet():
     try:
@@ -82,7 +73,6 @@ def convert_csv_to_parquet():
             
             logging.info(f"⚙️ [{idx}/{total_files}] Convertendo '{filename}' → '{parquet_name}'")
             
-            # Query otimizada com hints de performance
             conn.execute(f"""
                 COPY (
                     SELECT * FROM read_csv(

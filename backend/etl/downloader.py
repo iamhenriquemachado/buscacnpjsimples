@@ -5,7 +5,7 @@ import os
 import logging
 import httpx
 import aiofiles
-from utils import normalize_csv_filenames
+from utils import rename_receita_files
 import zipfile
 
 logging.basicConfig(level=logging.INFO)
@@ -30,13 +30,13 @@ def extract_file(zip_path, extract_dir):
     try:
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_dir)
-            logging.info(f"📂 Extracted: {zip_path} -> {extract_dir}")
+            logging.info(f"📂 Extraído de/para: {zip_path} -> {extract_dir}")
     except FileNotFoundError:
-        logging.error(f"❌ File not found: {zip_path}")
+        logging.error(f"❌ Arquivo não encontrado: {zip_path}")
     except zipfile.BadZipFile:
-        logging.error(f"❌ Bad zip file: {zip_path}")
+        logging.error(f"❌ Arquivo mal-formado: {zip_path}")
     except Exception as e:
-        logging.error(f"❌ Unexpected error while extracting {zip_path}: {e}")
+        logging.error(f"❌ Um erro inesperado ocorreu ao tentar extrair o arquivo: {zip_path}: {e}")
 
 
 async def download_file_async(file_url, file_path, extract_dir, client):
@@ -60,18 +60,18 @@ async def download_file_async(file_url, file_path, extract_dir, client):
                 await asyncio.to_thread(extract_file, file_path, extract_dir)
                 return True
             else:
-                logging.warning(f"⚠️ File {file_path} is empty or corrupted. Retrying...")
+                logging.warning(f"⚠️ Arquivo {file_path} está vazio ou corrompido. Tentando novamente...")
 
         except (httpx.RequestError, httpx.HTTPStatusError) as e:
-            logging.error(f"❌ Error downloading {file_url} on attempt {attempts + 1}: {e}")
+            logging.error(f"❌ Erro durante o download {file_url} na tentativa {attempts + 1}: {e}")
 
         attempts += 1
         if attempts < max_attempts:
             wait_time = 2 ** attempts
-            logging.info(f"🔄 Retrying in {wait_time}s... (Attempt {attempts}/{max_attempts})")
+            logging.info(f"🔄 Tentando novamente em {wait_time}s... (Tentativa {attempts}/{max_attempts})")
             await asyncio.sleep(wait_time)
 
-    logging.error(f"❌ Failed to download {file_url} after {max_attempts} attempts")
+    logging.error(f"❌ O download falhou {file_url} depois de {max_attempts} tentativas")
     return False
 
 
@@ -85,11 +85,11 @@ async def download_all_async():
 
     async with httpx.AsyncClient(timeout=httpx.Timeout(600.0, read=600.0)) as client:
         try:
-            logging.info(f'Downloading process started at: {datetime.now()}')
+            logging.info(f'Download iniciado em: {datetime.now()}')
             response = await client.get(base_url)
             response.raise_for_status()
         except (httpx.RequestError, httpx.HTTPStatusError) as e:
-            logging.error(f"The URL {base_url} is unavailable: {e}")
+            logging.error(f"URL {base_url} indisponível: {e}")
             return None
 
         soup = BeautifulSoup(response.text, "html.parser")
@@ -104,9 +104,9 @@ async def download_all_async():
                 file_url = f"{base_url}{href}"
                 file_path = os.path.join(download_dir, href)
 
-                # Se o arquivo já existe, ainda assim extrai
+
                 if os.path.exists(file_path):
-                    logging.info(f"⚠️ File {href} already exists. Extracting if needed...")
+                    logging.info(f"⚠️ O arquivo {href} já existe. Extraindo arquivo (se necessário)...")
                     await asyncio.to_thread(extract_file, file_path, extract_dir)
                     continue
 
@@ -115,15 +115,20 @@ async def download_all_async():
         if tasks:
             await asyncio.gather(*tasks)
 
-        # Também extrai qualquer ZIP que esteja no diretório e não foi processado
         for file in os.listdir(download_dir):
             if file.endswith(".zip"):
                 file_path = os.path.join(download_dir, file)
                 await asyncio.to_thread(extract_file, file_path, extract_dir)
+        
+        logging.info("🔄 Renomeando arquivos CSV...")
+        renamed_files = await asyncio.to_thread(
+            rename_receita_files, 
+            extract_dir,  
+            False  
+        )
 
-        logging.info("✅ All downloads and extractions finished!")
-        normalize_csv_filenames()
-        return download_dir
+        logging.info("✅ Downloads e extrações concluído corretamente.")
+        return download_dir, extract_dir, renamed_files
 
 
 if __name__ == "__main__":
