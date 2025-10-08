@@ -1,104 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/styles.css" />
-    <title>Busca CNPJ Simples - API</title>
-  </head>
 
-  <body>
-    <!-- HEADER -->
-    <header>
-      <nav class="navigation-menu">
-        <h1>Busca CNPJ Simples API</h1>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <title>Busca CNPJ Simples - API</title>
+</head>
 
-    <!-- HERO -->
-    <main>
-      <section class="hero">
-        <!-- SOBRE A API -->
-        <section class="section-api about">
-          <h3>Introdução</h3>
-          <p>
-            A <strong>Busca CNPJ Simples</strong> é uma API pública e
-            open-source que fornece acesso rápido e gratuito aos dados de
-            empresas registradas na Receita Federal do Brasil. Desenvolvida para
-            ser leve, escalável e de alta disponibilidade, ela permite integrar
-            informações de CNPJs em aplicações, sistemas ou análises com
-            facilidade.
-          </p>
-        </section>
-      </section>
+<body>
+  <!-- HEADER -->
+  <header>
+    <nav class="navigation-menu">
+      <h2>Busca CNPJ Simples API</h2>
+    </nav>
+  </header>
 
-      <!-- COMO USAR -->
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <!-- SOBRE A API -->
       <section class="section-api">
-        <h3>Como usar</h3>
+        <h3>Introdução</h3>
         <p>
-          A API utiliza o método HTTP GET e pode ser consultada por meio do
-          seguinte endpoint principal, retornando os dados em formato JSON
-          estruturado, ideal para consumo em aplicações modernas. Para começar a
-          utilizar a API, utilize o seguinte endpoint:
+          A <strong>Busca CNPJ Simples</strong> oferece acesso público e gratuito às informações de empresas brasileiras. Informe um CNPJ válido e obtenha um JSON pronto para uso.
         </p>
+      </section>
+    </section>
 
-        <div class="code-label">Requisição</div>
-        <p class="base-url">
-          <strong>Base URL:</strong>
-          <code class="base-url-code"
-            >https://api-buscacnpjsimples.com.br/cnpj/:cnpj</code
-          >
-        </p>
+    <!-- COMO USAR -->
+    <section class="section-api">
+      <h3>Como usar</h3>
+      <p>
+        A API utiliza o método HTTP GET e pode ser consultada por meio do
+        seguinte endpoint principal, retornando os dados em formato JSON
+        estruturado, ideal para consumo em aplicações modernas. Para começar a
+        utilizar a API, utilize o seguinte endpoint:
+      </p>
 
-        <div class="code-label">Parâmetros</div>
-        <p>
-          O endpoint da API requer que você informe um CNPJ no caminho (path) da
-          requisição. Ele deve conter <strong>14 dígitos</strong> e pode ser
-          enviado em diferentes formatos.         <p>
-          <strong>Dica:</strong> A API processa automaticamente o CNPJ,
-          independentemente do formato utilizado, contanto que contenha 14
-          dígitos válidos.
-        </p>
-        </p>
+      <div class="code-label">Requisição</div>
+      <p class="base-url">
+        <strong>Base URL:</strong>
+        <code class="base-url-code">https://api-buscacnpjsimples.com.br/cnpj/:cnpj</code>
+      </p>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Formato</th>
-              <th>Exemplo</th>
-              <th>Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Somente números</td>
-              <td>00000000000191</td>
-              <td>
-                Formato mais simples e recomendado para chamadas programáticas.
-              </td>
-            </tr>
-            <tr>
-              <td>Com pontuação completa</td>
-              <td>00.000.000/0000-91</td>
-              <td>
-                Inclui pontos, barra e hífen. Aceito pela API sem problemas.
-              </td>
-            </tr>
-            <tr>
-              <td>Com pontos e barra (sem hífen)</td>
-              <td>00.000.000/000091</td>
-              <td>
-                Alternativa intermediária, útil quando não se deseja usar o
-                hífen.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="code-label">Parâmetros</div>
+      </p>
 
+      <table>
+        <thead>
+          <tr>
+            <th>Formato</th>
+            <th>Exemplo</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Somente números</td>
+            <td>00000000000191</td>
+            <td>
+              Formato mais simples e recomendado para chamadas programáticas.
+            </td>
+          </tr>
+          <tr>
+            <td>Com pontuação completa</td>
+            <td>00.000.000/0000-91</td>
+            <td>
+              Inclui pontos, barra e hífen. Aceito pela API sem problemas.
+            </td>
+          </tr>
+          <tr>
+            <td>Com pontos e barra (sem hífen)</td>
+            <td>00.000.000/000091</td>
+            <td>
+              Alternativa intermediária, útil quando não se deseja usar o
+              hífen.
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+      <div class="code-label">Teste a API</div>
+      <p>
+        Insira abaixo um número de CNPJ válido para consultar os dados
+        diretamente da <strong>API Busca CNPJ Simples</strong>. O retorno é
+        rápido e totalmente gratuito.
+      </p>
 
-        <div class="code-label">Resposta JSON</div>
-        <pre>{
+      <form class="test-form" id="testForm">
+        <input type="text" id="cnpjInput" placeholder="Digite o CNPJ (ex: 00000000000191)" maxlength="14"
+          pattern="[0-9]*" required />
+        <button type="submit">Buscar informações</button>
+      </form>
+
+      <br>
+
+      <div class="code-label">Resposta JSON</div>
+      <pre>{
   <span class="json-key">"cnpj"</span><span class="json-punctuation">:</span> <span class="json-string">"00000000000191"</span><span class="json-punctuation">,</span>
   <span class="json-key">"razao_social"</span><span class="json-punctuation">:</span> <span class="json-string">"EMPRESA EXEMPLO LTDA"</span><span class="json-punctuation">,</span>
   <span class="json-key">"nome_fantasia"</span><span class="json-punctuation">:</span> <span class="json-string">"EMPRESA EXEMPLO"</span><span class="json-punctuation">,</span>
@@ -106,139 +105,100 @@
   <span class="json-key">"municipio"</span><span class="json-punctuation">:</span> <span class="json-string">"São Paulo"</span><span class="json-punctuation">,</span>
   <span class="json-key">"data_abertura"</span><span class="json-punctuation">:</span> <span class="json-string">"1995-07-12"</span>
 }</pre>
-      </section>
+    </section>
 
-      <!-- TESTE A API -->
-      <section class="api-test">
-        <h3>Teste a API em tempo real</h3>
+          <section class="section-api">
+        <h3>Dados</h3>
         <p>
-          Insira abaixo um número de CNPJ válido para consultar os dados
-          diretamente da <strong>API Busca CNPJ Simples</strong>. O retorno é
-          rápido e totalmente gratuito.
+          Todos os dados são disponibilizados publicamente pela Receita Federal. A base é atualizada mensalmente, conforme a publicação mensal dos dados pela Receita Federal.
         </p>
 
-        <form class="test-form" id="testForm">
-          <input
-            type="text"
-            id="cnpjInput"
-            placeholder="Digite o CNPJ (ex: 00000000000191)"
-            maxlength="14"
-            pattern="[0-9]*"
-            required
-          />
-          <button type="submit">Buscar informações</button>
-        </form>
+        <p><strong>Total de CNPJs cadastrados na base:</strong> 67.640.759</p>
+        <p><strong>Última atualização da base:</strong> 16/09/2025, 13:50</p>
+
+        <p>Prefere trabalhar offline ou integrar localmente? Baixe a base completa de CNPJs em um único arquivo ZIP e processe no seu próprio ambiente. O pacote é atualizado mensalmente, em formato aberto.</p>
+
+        <button type="submit" class="pix-button">Download Base Completa (.zip)</button>
       </section>
 
-      <!-- COMO A API FOI CONSTRUÍDA -->
-      <section class="section-api">
-        <h3>Como a API foi Construída</h3>
-        <p>
-          <strong>Pipeline ETL:</strong> Pipeline automatizado que extrai dados
-          da Receita Federal, converte para formato Parquet (otimizado para
-          processamento) e carrega em PostgreSQL. Arquitetura modular em Python
-          com componentes especializados: <code>downloader.py</code>,
-          <code>processor.py</code>, <code>parquet_converter.py</code> e
-          <code>database.py</code>.
-        </p>
-        <br />
-        <p>
-          <strong>Stack:</strong> FastAPI + Python 3.11, PostgreSQL, Docker e
-          VPS. Documentação automática via Swagger, código versionado no GitHub
-          para total transparência e contribuições open-source.
-        </p>
-        <br />
-        <p>
-          <strong>Processo de Atualização:</strong> Atualização mensal
-          automatizada via cron scheduler, com janela de 2-4 dias após
-          publicação da Receita Federal. O sistema detecta, processa e atualiza
-          os dados sem intervenção manual.
-        </p>
-      </section>
 
-      <!-- APOIE O PROJETO -->
-      <section class="support">
-        <h3>Apoie este projeto 💚</h3>
-        <p>
-          Este projeto é gratuito e open-source. Se ele te ajuda, considere
-          apoiar para manter a API online e sempre atualizada.
-        </p>
 
-        <div class="support-buttons">
-          <!-- PIX -->
-          <button class="pix-button" onclick="copyPixKey()">
-            💰 Copiar chave Pix
-          </button>
+    <!-- APOIE O PROJETO -->
+    <section class="support">
+      <h3>Apoie este projeto</h3>
+      <p>
+        Este projeto é gratuito e open-source. Se ele te ajuda, considere
+        apoiar para manter a API online e sempre atualizada.
+      </p>
 
-          <!-- BUY ME A COFFEE -->
-          <a
-            href="https://www.buymeacoffee.com/seulink"
-            target="_blank"
-            class="coffee-button"
-          >
-            ☕ Buy me a coffee
-          </a>
+      <div class="support-buttons">
+        <!-- PIX -->
+        <button class="pix-button" onclick="copyPixKey()">
+          Copiar chave Pix
+        </button>
+
+      </div>
+
+      <p id="pixMessage" class="pix-message"></p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h3>Perguntas Frequentes</h3>
+
+      <div class="faq-item">
+        <button class="faq-question">A API é gratuita?</button>
+        <div class="faq-answer">
+          <p>
+            Sim, a API Busca Cnpj Simples é gratuita. Não oferecemos suporte
+            dedicado, pois o projeto é open-source.
+          </p>
         </div>
+      </div>
 
-        <p id="pixMessage" class="pix-message"></p>
-      </section>
-
-      <!-- FAQ -->
-      <section class="faq">
-        <h3>Perguntas Frequentes</h3>
-
-        <div class="faq-item">
-          <button class="faq-question">A API é gratuita?</button>
-          <div class="faq-answer">
-            <p>
-              Sim, a API Busca Cnpj Simples é gratuita. Não oferecemos suporte
-              dedicado, pois o projeto é open-source.
-            </p>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Os dados são consultados/atualizados em tempo real?
+        </button>
+        <div class="faq-answer">
+          <p>
+            Não. Os dados são atualizados mensalmente de acordo com a base de
+            dados da Receita Federal do Brasil.
+          </p>
         </div>
+      </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
-            Os dados são consultados/atualizados em tempo real?
-          </button>
-          <div class="faq-answer">
-            <p>
-              Não. Os dados são atualizados mensalmente de acordo com a base de
-              dados da Receita Federal do Brasil.
-            </p>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Quanto tempo após a publicação da Receita Federal vocês atualizam a
+          base?
+        </button>
+        <div class="faq-answer">
+          <p>Em média de 2 a 3 dias após a publicação no site oficial.</p>
         </div>
+      </div>
 
-        <div class="faq-item">
-          <button class="faq-question">
-            Quanto tempo após a publicação da Receita Federal vocês atualizam a
-            base?
-          </button>
-          <div class="faq-answer">
-            <p>Em média de 2 a 3 dias após a publicação no site oficial.</p>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Existem limites de requisição para o uso da API?
+        </button>
+        <div class="faq-answer">
+          <p>
+            Sim, existe um limite de 50 requisições por IP/segundo. Caso você
+            ultrapasse este limite, iremos aplicar dois bloqueios temporários
+            e no terceiro, seu IP será bloqueado definitivamente.
+          </p>
         </div>
+      </div>
+    </section>
+  </main>
 
-        <div class="faq-item">
-          <button class="faq-question">
-            Existem limites de requisição para o uso da API?
-          </button>
-          <div class="faq-answer">
-            <p>
-              Sim, existe um limite de 50 requisições por IP/segundo. Caso você
-              ultrapasse este limite, iremos aplicar dois bloqueios temporários
-              e no terceiro, seu IP será bloqueado definitivamente.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Brasil CNPJ Simples. Open-source sob licença MIT.</p>
+  </footer>
 
-    <!-- FOOTER -->
-    <footer>
-      <p>© 2025 Brasil CNPJ Simples. Open-source sob licença MIT.</p>
-    </footer>
+  <script src="./scripts/animations.js"></script>
+</body>
 
-    <script src="./scripts/animations.js"></script>
-  </body>
 </html>

@@ -60,8 +60,7 @@ header .navigation-menu {
   justify-content: center;
 }
 
-header .navigation-menu h1 {
-  font-size: 1.75rem;
+header .navigation-menu h2 {
   color: #009866;
 }
 
@@ -179,7 +178,7 @@ main {
   border-radius: 8px;
   transition: background-color 0.3s ease;
   font-weight: 500;
-  align-content: center;
+  align-content: left;
 }
 
 .hero .button:hover {
@@ -311,12 +310,12 @@ main {
   margin-bottom: var(--spacing-md);
   font-size: 1rem;
   color: var(--color-text);
-  text-align: center;
+  text-align: left;
 }
 
 .support-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   gap: 1rem;
   flex-wrap: wrap;
 }
