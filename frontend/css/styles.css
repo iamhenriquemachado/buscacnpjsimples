@@ -109,7 +109,7 @@ main {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: var(--spacing-md);
-  font-family: "Inter", monospace;
+  font-family: monospace;
 }
 
 .section-api th,
@@ -117,7 +117,6 @@ main {
   border: 1px solid var(--color-border);
   padding: 0.75rem 1rem;
   text-align: left;
-  border-radius: 5px;
 }
 
 
