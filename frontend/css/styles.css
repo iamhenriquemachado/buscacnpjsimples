@@ -6,7 +6,7 @@
   --color-primary: #111827;
   --color-primary-light: #374151;
   --color-contrast: #ffffff;
-  --color-green-standard: #009866;
+  --color-green-standard: #006045;
   --color-border: #e5e7eb;
   --color-code-bg: #1f2937;
   --color-shadow: rgba(0,0,0,0.05);
@@ -36,7 +36,6 @@
 
 body {
   font-family: "Inter", monospace;
-  background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   display: flex;
@@ -58,30 +57,12 @@ header .navigation-menu {
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-
-
+  justify-content: center;
 }
 
 header .navigation-menu h1 {
   font-size: 1.75rem;
   color: #009866;
-}
-
-.theme-toggle {
-  background: none;
-  border: 2px solid var(--color-border);
-  color: var(--color-text);
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .theme-toggle:hover {
@@ -96,14 +77,14 @@ header .logo img {
 
 header .logo h1 {
   font-size: 1.75rem;
-  color: #009866;
+  color: #006045;
 }
 
 /* MAIN / SEÇÕES */
 main {
   flex: 1;
   width: 100%;
-  padding: var(--spacing-lg) var(--spacing-md);
+  /* padding: var(--spacing-lg) var(--spacing-md); */
 }
 
 .hero {
@@ -112,19 +93,81 @@ main {
   text-align: left;
 }
 
-.hero h2 {
-  font-size: 2.25rem;
-  margin-bottom: var(--spacing-md);
-  color: var(--color-primary);
-  text-align: center;
+.section-api .base-url {
+  background-color: #d0fae5;
+  padding: 10px;
+  border-radius: 10px;
 }
+
+.section-api .base-url strong, code {
+  color: #006045;
+  font-family: "Jet Brains Mono", monospace;
+}
+
+/* ESTILO PARA TABELAS */
+.section-api table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-md);
+  font-family: "Inter", monospace;
+}
+
+.section-api th,
+.section-api td {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-radius: 5px;
+}
+
+
+.section-api th {
+  background-color: var(--color-primary-light);
+  color: var(--color-contrast);
+  font-weight: 600;
+}
+
+.section-api tbody tr:nth-child(even) {
+  background-color: var(--color-bg);
+}
+
+@media (max-width: 600px) {
+  .section-api table,
+  .section-api thead,
+  .section-api tbody,
+  .section-api th,
+  .section-api td,
+  .section-api tr {
+    display: block;
+    width: 100%;
+  }
+
+  .section-api thead tr {
+    display: none;
+  }
+
+  .section-api td {
+    padding-left: 50%;
+    position: relative;
+    text-align: left;
+  }
+
+  .section-api td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
 
 .hero p {
   font-size: 1.125rem;
   margin-bottom: var(--spacing-lg);
   color: var(--color-text);
   line-height: 1.6;
-  text-align: center;
+  text-align: left;
 }
 
 /* botão/link principal */
@@ -145,17 +188,17 @@ main {
 }
 
 /* LAYOUT EM CARD PARA TODAS AS SEÇÕES */
+
 .section-api,
 .api-test,
 .faq,
 .support {
   max-width: var(--max-width);
   margin: var(--spacing-lg) auto;
-  padding: var(--spacing-md);
-  background-color: var(--color-contrast);
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 2px 4px var(--color-shadow);
+  /* background-color: var(--color-contrast); */
+  /* border-radius: 8px; */
+  /* border: 1px solid var(--color-border); */
+  /* box-shadow: 0 2px 4px var(--color-shadow); */
   transition: all 0.3s ease;
 }
 
@@ -166,7 +209,7 @@ main {
   font-size: 1.5rem;
   margin-bottom: var(--spacing-md);
   color: var(--color-primary);
-  text-align: center;
+  text-align: left;
 }
 
 .section-api p,
