@@ -9,28 +9,59 @@
 </head>
 
 <body>
-  <!-- HEADER -->
+  <!-- HEADER MELHORADO -->
   <header>
-    <nav class="navigation-menu">
-      <h2>Busca CNPJ Simples API</h2>
-    </nav>
+    <div class="header-container">
+      <!-- LOGO -->
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>Busca CNPJ Simples</h1>
+          <span>API RESTFUL</span>
+        </div>
+      </a>
+      
+      <!-- MENU TOGGLE (Mobile) -->
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <!-- NAVEGAÇÃO -->
+      <nav class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="#inicio" class="active">Início</a></li>
+          <li><a href="#documentacao">Documentação</a></li>
+          <li><a href="#dados">Dados</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#apoiar" class="cta-button">Apoiar Projeto</a>
+      </nav>
+    </div>
   </header>
 
   <!-- HERO -->
   <main>
-    <section class="hero">
+    <section class="hero" id="inicio">
       <!-- SOBRE A API -->
       <section class="section-api">
-        <h3>Introdução</h3>
+        <h3 >Introdução</h3>
         <p>
-          A <strong>Busca CNPJ Simples</strong> oferece acesso público e gratuito às informações de empresas brasileiras. Informe um CNPJ válido e obtenha um JSON pronto para uso.
+          A <strong>Busca CNPJ Simples</strong> oferece acesso público e gratuito às informações de empresas brasileiras. Informe um CNPJ válido e obtenha um JSON pronto para uso. Você terá acesso a um único endpoint - sem necessidade de autenticação.
         </p>
       </section>
     </section>
 
     <!-- COMO USAR -->
-    <section class="section-api">
-      <h3>Como usar</h3>
+    <section class="section-api" id="documentacao">
+      <h3>Documentação</h3>
       <p>
         A API utiliza o método HTTP GET e pode ser consultada por meio do
         seguinte endpoint principal, retornando os dados em formato JSON
@@ -42,7 +73,9 @@
       <p class="base-url">
         <strong>Base URL:</strong>
         <code class="base-url-code">https://api-buscacnpjsimples.com.br/cnpj/:cnpj</code>
+         <button id="baseEndpoint">Copiar</button>
       </p>
+     
 
       <div class="code-label">Parâmetros</div>
       </p>
@@ -107,21 +140,19 @@
 }</pre>
     </section>
 
-          <section class="section-api">
-        <h3>Dados</h3>
-        <p>
-          Todos os dados são disponibilizados publicamente pela Receita Federal. A base é atualizada mensalmente, conforme a publicação mensal dos dados pela Receita Federal.
-        </p>
+    <section class="section-api" id="dados">
+      <h3>Dados</h3>
+      <p>
+        Todos os dados são disponibilizados publicamente pela Receita Federal. A base é atualizada mensalmente, conforme a publicação mensal dos dados pela Receita Federal.
+      </p>
 
-        <p><strong>Total de CNPJs cadastrados na base:</strong> 67.640.759</p>
-        <p><strong>Última atualização da base:</strong> 16/09/2025, 13:50</p>
+      <p><strong>Total de CNPJs cadastrados na base:</strong> 67.640.759</p>
+      <p><strong>Última atualização da base:</strong> 16/09/2025, 13:50</p>
 
-        <p>Prefere trabalhar offline ou integrar localmente? Baixe a base completa de CNPJs em um único arquivo ZIP e processe no seu próprio ambiente. O pacote é atualizado mensalmente, em formato aberto.</p>
+      <p>Prefere trabalhar offline ou integrar localmente? Baixe a base completa de CNPJs em um único arquivo ZIP e processe no seu próprio ambiente. O pacote é atualizado mensalmente, em formato aberto.</p>
 
-        <button type="submit" class="pix-button">Download Base Completa (.zip)</button>
-      </section>
-
-
+      <button type="submit" class="pix-button">Download Base Completa (.zip)</button>
+    </section>
 
     <!-- APOIE O PROJETO -->
     <section class="support">
@@ -136,14 +167,13 @@
         <button class="pix-button" onclick="copyPixKey()">
           Copiar chave Pix
         </button>
-
       </div>
 
       <p id="pixMessage" class="pix-message"></p>
     </section>
 
     <!-- FAQ -->
-    <section class="faq">
+    <section class="faq" id="faq">
       <h3>Perguntas Frequentes</h3>
 
       <div class="faq-item">

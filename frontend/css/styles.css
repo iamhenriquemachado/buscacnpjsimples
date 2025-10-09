@@ -35,55 +35,192 @@
 }
 
 body {
-  font-family: "Inter", monospace;
+  font-family: "Inter", sans-serif;
   color: var(--color-text);
   line-height: 1.6;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--color-bg);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* HEADER */
 header {
-  width: 100%;
-  padding: var(--spacing-md);
-  background-color: var(--color-contrast);
-  box-shadow: 0 2px 4px var(--color-shadow);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
-header .navigation-menu {
-  max-width: var(--max-width);
+.header-container {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header .navigation-menu h2 {
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+}
+
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #009866 0%, #007a52 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 152, 102, 0.25);
+}
+
+.logo-icon svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.logo-text h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.logo-text span {
+  font-size: 0.75rem;
+  color: #009866;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* NAVEGAÇÃO */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #009866, #007a52);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
   color: #009866;
 }
 
-.theme-toggle:hover {
-  background-color: var(--color-bg);
-  transform: scale(1.05);
+.nav-links a:hover::after {
+  width: 100%;
 }
 
-header .logo img {
-  height: 48px;
-  width: auto;
+.nav-links a.active {
+  color: #009866;
 }
 
-header .logo h1 {
-  font-size: 1.75rem;
-  color: #006045;
+.nav-links a.active::after {
+  width: 100%;
 }
 
-/* MAIN / SEÇÕES */
+/* BOTÃO CTA */
+.cta-button {
+  background: linear-gradient(135deg, #009866 0%, #007a52 100%);
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 152, 102, 0.25);
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 152, 102, 0.35);
+}
+
+/* MENU HAMBURGUER (Mobile) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #374151;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============================================
+   MAIN / SEÇÕES
+   ============================================ */
 main {
   flex: 1;
   width: 100%;
-  /* padding: var(--spacing-lg) var(--spacing-md); */
 }
 
 .hero {
@@ -92,15 +229,71 @@ main {
   text-align: left;
 }
 
+/* Estilo para o container da Base URL */
 .section-api .base-url {
   background-color: #d0fae5;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
-.section-api .base-url strong, code {
+.section-api .base-url strong,
+.section-api .base-url code {
   color: #006045;
-  font-family: "Jet Brains Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.section-api .base-url code {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Estilo do botão Copiar */
+#baseEndpoint {
+  padding: 0.5rem 1rem;
+  background-color: #009866;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 152, 102, 0.2);
+}
+
+#baseEndpoint:hover {
+  background-color: #007a52;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 152, 102, 0.3);
+}
+
+#baseEndpoint:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 152, 102, 0.2);
+}
+
+/* Estado de "copiado" */
+#baseEndpoint.copied {
+  background-color: #10b981;
+  animation: successPulse 0.5s ease;
+}
+
+/* Animação de sucesso */
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* ESTILO PARA TABELAS */
@@ -118,7 +311,6 @@ main {
   text-align: left;
 }
 
-
 .section-api th {
   background-color: var(--color-primary-light);
   color: var(--color-contrast);
@@ -128,37 +320,6 @@ main {
 .section-api tbody tr:nth-child(even) {
   background-color: var(--color-bg);
 }
-
-@media (max-width: 600px) {
-  .section-api table,
-  .section-api thead,
-  .section-api tbody,
-  .section-api th,
-  .section-api td,
-  .section-api tr {
-    display: block;
-    width: 100%;
-  }
-
-  .section-api thead tr {
-    display: none;
-  }
-
-  .section-api td {
-    padding-left: 50%;
-    position: relative;
-    text-align: left;
-  }
-
-  .section-api td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-}
-
 
 .hero p {
   font-size: 1.125rem;
@@ -186,17 +347,13 @@ main {
 }
 
 /* LAYOUT EM CARD PARA TODAS AS SEÇÕES */
-
 .section-api,
 .api-test,
 .faq,
 .support {
   max-width: var(--max-width);
   margin: var(--spacing-lg) auto;
-  /* background-color: var(--color-contrast); */
-  /* border-radius: 8px; */
-  /* border: 1px solid var(--color-border); */
-  /* box-shadow: 0 2px 4px var(--color-shadow); */
+  padding: 0 var(--spacing-md);
   transition: all 0.3s ease;
 }
 
@@ -231,7 +388,7 @@ main {
   padding: var(--spacing-sm);
   border-radius: 8px;
   overflow-x: auto;
-  font-family: "Inter", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   margin-bottom: var(--spacing-md);
   border: 1px solid #374151;
@@ -272,7 +429,7 @@ main {
   padding: 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  font-family: "Inter", monospace;
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
   background-color: var(--color-bg);
@@ -290,7 +447,7 @@ main {
   color: #ffffff;
   border: none;
   border-radius: 8px;
-  font-family: "Inter", monospace;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -351,11 +508,14 @@ main {
   background-color: #e6732e;
 }
 
+/* Mensagem do PIX com transição suave */
 .pix-message {
   margin-top: 1rem;
   color: #009866;
   font-weight: 600;
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* FAQ */
@@ -410,29 +570,78 @@ footer p {
   color: #6b7280;
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 600px) {
-  header .navigation-menu {
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Header Mobile */
+  .header-container {
+    padding: 1rem 1.5rem;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-links {
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
   }
+  
+  .nav-links a {
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .nav-links a:hover {
+    background: #f3f4f6;
+  }
+  
+  .cta-button {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .logo-text h1 {
+    font-size: 1.1rem;
+  }
+  
+  .logo-text span {
+    font-size: 0.7rem;
+  }
+}
 
-  header .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  header .logo h1,
-  header .navigation-menu h1 {
-    font-size: 1.5rem;
-  }
-  
+@media (max-width: 600px) {
   .hero h2 {
     font-size: 1.75rem;
   }
   
   .section-api {
-    padding: var(--spacing-md);
+    padding: 0 var(--spacing-md);
   }
   
   .test-form {
@@ -442,4 +651,36 @@ footer p {
   .test-form button {
     width: 100%;
   }
-}
+
+  /* Responsividade para Base URL */
+  .section-api .base-url {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .section-api .base-url code {
+    min-width: 100%;
+    word-break: break-all;
+  }
+  
+  #baseEndpoint {
+    width: 100%;
+  }
+
+  /* Tabelas responsivas */
+  .section-api table,
+  .section-api thead,
+  .section-api tbody,
+  .section-api th,
+  .section-api td,
+  .section-api tr {
+    display: block;
+    width: 100%;
+  }
+
+  .section-api thead tr {
+    display: none;
+  }
+
+  .section-api td {
+    padding-left: 50
