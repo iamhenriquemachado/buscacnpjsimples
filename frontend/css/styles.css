@@ -216,8 +216,8 @@ header {
 }
 
 /* ============================================
-   MAIN / SEÇÕES
-   ============================================ */
+    MAIN / SEÇÕES
+    ============================================ */
 main {
   flex: 1;
   width: 100%;
@@ -323,7 +323,6 @@ main {
 
 .hero p {
   font-size: 1.125rem;
-  margin-bottom: var(--spacing-lg);
   color: var(--color-text);
   line-height: 1.6;
   text-align: left;
@@ -346,29 +345,80 @@ main {
   background-color: #007a52;
 }
 
+
 /* LAYOUT EM CARD PARA TODAS AS SEÇÕES */
 .section-api,
-.api-test,
-.faq,
-.support {
+.support,
+.faq {
   max-width: var(--max-width);
   margin: var(--spacing-lg) auto;
-  padding: 0 var(--spacing-md);
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
-.section-api h3,
-.api-test h3,
-.faq h3,
-.support h3 {
-  font-size: 1.5rem;
-  margin-bottom: var(--spacing-md);
-  color: var(--color-primary);
-  text-align: left;
+/* Cabeçalho Padrão de Seção (Compartilhado) */
+.section-header, .support-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.section-api p,
-.api-test p {
+.section-icon, .support-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon svg, .support-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.section-text, .support-text {
+  flex: 1;
+}
+
+.section-text h3, .support-text h3 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.section-subtitle, .support-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Conteúdo Padrão de Seção (com divisor) */
+.section-content, .support-content {
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Estilos específicos para os ícones */
+.section-icon {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+.section-icon svg {
+  color: #047857;
+}
+
+
+/* SEÇÃO DE USO DA API / exemplos */
+.section-content p {
   margin-bottom: 1rem;
 }
 
@@ -381,7 +431,6 @@ main {
   color: #007a52;
 }
 
-/* SEÇÃO DE USO DA API / exemplos */
 .section-api pre {
   background-color: var(--color-code-bg);
   color: #f9fafb;
@@ -463,8 +512,8 @@ main {
 }
 
 /* ============================================
-   SEÇÃO DE DADOS
-   ============================================ */
+    SEÇÃO DE DADOS
+    ============================================ */
 
 /* Grid de cards de estatísticas */
 .data-stats {
@@ -577,56 +626,19 @@ main {
 }
 
 /* ============================================
-   APOIE O PROJETO
-   ============================================ */
-.support {
-  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 3rem 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.support-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-}
-
+    APOIE O PROJETO
+    ============================================ */
+/* Estilo específico para o ícone da seção de apoio */
 .support-icon {
-  width: 64px;
-  height: 64px;
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .support-icon svg {
-  width: 32px;
-  height: 32px;
   color: #d97706;
 }
 
-.support-text {
-  flex: 1;
-}
-
-.support-text h3 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-primary);
-}
-
-.support-subtitle {
-  font-size: 1.1rem;
-  color: #6b7280;
-  margin: 0;
-  line-height: 1.6;
-}
+/* Os estilos .support, .support-header, .support-text, e .support-subtitle
+   agora herdam do estilo geral de seção. Apenas o grid específico é mantido. */
 
 .support-content {
   display: grid;
@@ -852,8 +864,8 @@ footer p {
 }
 
 /* ============================================
-   RESPONSIVIDADE
-   ============================================ */
+    RESPONSIVIDADE
+    ============================================ */
 @media (max-width: 768px) {
   /* Header Mobile */
   .header-container {
@@ -921,8 +933,8 @@ footer p {
     font-size: 1.75rem;
   }
   
-  .section-api {
-    padding: 0 var(--spacing-md);
+  .section-api, .support, .faq {
+    padding: 2rem 1.5rem;
   }
   
   .test-form {
@@ -970,25 +982,22 @@ footer p {
     justify-content: center;
   }
 
-  /* Support section responsivo */
-  .support {
-    padding: 2rem 1.5rem;
-  }
-
-  .support-header {
+  /* Seções com card responsivas */
+  .section-header, .support-header {
     flex-direction: column;
     text-align: center;
     align-items: center;
   }
-
-  .support-text h3 {
+  
+  .section-text h3, .support-text h3 {
     font-size: 1.75rem;
   }
 
-  .support-subtitle {
+  .section-subtitle, .support-subtitle {
     font-size: 1rem;
   }
 
+  /* Support section responsivo */
   .support-content {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1031,6 +1040,18 @@ footer p {
   }
 
   .section-api td {
-    padding-left: 50;
+    padding-left: 50%;
+    position: relative;
+    text-align: right;
+  }
+  
+  .section-api td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 1rem;
+      width: calc(50% - 2rem);
+      text-align: left;
+      font-weight: bold;
+      white-space: nowrap;
   }
 }
