@@ -2,15 +2,44 @@
 <html lang="pt-BR">
 
 <head>
+  <!-- CONFIGURAÇÃO BÁSICA -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- TÍTULO E DESCRIÇÃO -->
+  <title>Busca CNPJ Simples - API pública e gratuita</title>
+  <meta name="description" content="A Busca CNPJ Simples é uma API pública e open-source para consultar dados de empresas brasileiras pela Receita Federal, com respostas em JSON prontas para uso.">
+  <meta name="keywords" content="API CNPJ, consulta CNPJ, open source, Receita Federal, dados públicos, JSON, API gratuita, empresas brasileiras">
+  <meta name="author" content="Henrique de Castro Machado">
+
+  <!-- SEO AVANÇADO -->
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="pt-BR">
+  <meta name="revisit-after" content="7 days">
+
+  <!-- OPEN GRAPH (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="Busca CNPJ Simples - API pública e gratuita">
+  <meta property="og:description" content="Consulte dados de empresas brasileiras com a API pública e open-source Busca CNPJ Simples.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://buscacnpjsimples.com.br/">
+  <meta property="og:image" content="https://buscacnpjsimples.com.br/frontend/assets/og-image.png">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Busca CNPJ Simples - API pública e gratuita">
+  <meta name="twitter:description" content="Consulte dados de empresas brasileiras via API RESTful gratuita.">
+  <meta name="twitter:image" content="https://buscacnpjsimples.com.br/frontend/assets/og-image.png">
+  <meta name="twitter:creator" content="@henriquecm">
+
+  <!-- FAVICON E ESTILOS -->
   <link rel="icon" type="image/svg+xml" href="/frontend/assets/favicon.svg" />
   <link rel="stylesheet" href="./css/styles.css" />
 
-
-
-  <title>Busca CNPJ Simples - API</title>
+  <!-- CANONICAL URL -->
+  <link rel="canonical" href="https://buscacnpjsimples.com.br/">
 </head>
+
 
 <body>
   <!-- HEADER MELHORADO -->
@@ -58,7 +87,7 @@
       <section class="section-api">
         <h3 >Introdução</h3>
         <p>
-          A <strong>Busca CNPJ Simples</strong> oferece acesso público e gratuito às informações de empresas brasileiras. Informe um CNPJ válido e obtenha um JSON pronto para uso. Você terá acesso a um único endpoint - sem necessidade de autenticação.
+          A <strong>Busca CNPJ Simples</strong> é uma API pública e open-source que oferece acesso gratuito às informações de empresas brasileiras. Informe um CNPJ válido e obtenha um JSON pronto para uso. Você terá acesso a um único endpoint. 
         </p>
       </section>
     </section>
@@ -144,37 +173,150 @@
 }</pre>
     </section>
 
-    <section class="section-api" id="dados">
+   <section class="section-api" id="dados">
       <h3>Dados</h3>
       <p>
         Todos os dados são disponibilizados publicamente pela Receita Federal. A base é atualizada mensalmente, conforme a publicação mensal dos dados pela Receita Federal.
       </p>
 
-      <p><strong>Total de CNPJs cadastrados na base:</strong> 67.640.759</p>
-      <p><strong>Última atualização da base:</strong> 16/09/2025, 13:50</p>
+      <div class="data-stats">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Total de CNPJs</div>
+            <div class="stat-value">67.640.759</div>
+          </div>
+        </div>
 
-      <p>Prefere trabalhar offline ou integrar localmente? Baixe a base completa de CNPJs em um único arquivo ZIP e processe no seu próprio ambiente. O pacote é atualizado mensalmente, em formato aberto.</p>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Última atualização</div>
+            <div class="stat-value">16/09/2025</div>
+            <div class="stat-time">13:50</div>
+          </div>
+        </div>
+      </div>
 
-      <button type="submit" class="pix-button">Download Base Completa (.zip)</button>
+      <div class="download-section">
+        <div class="download-info">
+          <h4>Base Completa para Download</h4>
+          <p>Prefere trabalhar offline ou integrar localmente? Baixe a base completa de CNPJs em um único arquivo ZIP e processe no seu próprio ambiente. O pacote é atualizado mensalmente, em formato aberto.</p>
+        </div>
+        <button type="button" class="pix-button download-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Base Completa (.zip)
+        </button>
+      </div>
     </section>
 
     <!-- APOIE O PROJETO -->
-    <section class="support">
+    <!-- APOIE O PROJETO -->
+<section class="support" id="apoiar">
+  <div class="support-header">
+    <div class="support-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    </div>
+    <div class="support-text">
       <h3>Apoie este projeto</h3>
-      <p>
-        Este projeto é gratuito e open-source. Se ele te ajuda, considere
-        apoiar para manter a API online e sempre atualizada.
+      <p class="support-subtitle">
+        Este projeto é 100% gratuito e open-source, mantido com dedicação para a comunidade de desenvolvedores.
       </p>
+    </div>
+  </div>
 
-      <div class="support-buttons">
-        <!-- PIX -->
+  <div class="support-content">
+    <div class="support-info">
+      <h4>Por que apoiar?</h4>
+      <ul class="support-benefits">
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Mantém a API sempre online e disponível</span>
+        </li>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Garante atualizações mensais da base de dados</span>
+        </li>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Cobre custos de infraestrutura e servidores</span>
+        </li>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Incentiva melhorias e novas funcionalidades</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="support-action">
+      <div class="pix-card">
+        <div class="pix-header">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+            <path d="M242.4 292.5C247.8 287.1 257.1 287.1 262.5 292.5L339.5 369.5C353.7 383.7 372.6 391.5 392.6 391.5H407.7L310.6 488.6C280.3 518.1 231.1 518.1 200.8 488.6L103.3 391.2H112.6C132.6 391.2 151.5 383.4 165.7 369.2L242.4 292.5zM262.5 218.9C256.1 224.4 247.9 224.5 242.4 218.9L165.7 142.2C151.5 127.1 132.6 120.2 112.6 120.2H103.3L200.7 22.76C231.1-7.586 280.3-7.586 310.6 22.76L407.8 119.9H392.6C372.6 119.9 353.7 127.7 339.5 141.9L262.5 218.9zM112.6 142.7C126.4 142.7 139.1 148.3 149.7 158.1L226.4 234.8C235.8 244.2 245.6 251.1 256.1 256C245.6 260.9 235.8 267.8 226.4 277.2L149.7 353.9C139.1 363.7 126.4 369.3 112.6 369.3H16L93.08 292.2C102.7 282.5 102.7 267.1 93.08 257.4L16 180.3H112.6zM403.5 180.3H496L418.9 257.4C409.3 267.1 409.3 282.5 418.9 292.2L496 369.3H403.5C389.6 369.3 376.9 363.7 366.3 353.9L289.6 277.2C280.2 267.8 270.4 260.9 259.9 256C270.4 251.1 280.2 244.2 289.6 234.8L366.3 158.1C376.9 148.3 389.6 142.7 403.5 142.7V180.3z"/>
+          </svg>
+          <h4>Apoie via Pix</h4>
+        </div>
+        <p>Contribua com qualquer valor de forma rápida e segura</p>
         <button class="pix-button" onclick="copyPixKey()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
           Copiar chave Pix
         </button>
+        <p id="pixMessage" class="pix-message"></p>
       </div>
 
-      <p id="pixMessage" class="pix-message"></p>
-    </section>
+      <div class="github-card">
+        <div class="github-header">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <h4>Contribua no GitHub</h4>
+        </div>
+        <p>Dê uma estrela, reporte bugs ou contribua com código</p>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="github-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          Ver no GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="support-footer">
+    <p>🙏 Sua contribuição faz toda a diferença para manter este projeto gratuito e acessível para todos!</p>
+  </div>
+</section>
 
     <!-- FAQ -->
     <section class="faq" id="faq">
@@ -228,9 +370,17 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Brasil CNPJ Simples. Open-source sob licença MIT.</p>
-  </footer>
+<footer>
+  <p id="footer-text">© <span id="year"></span> Brasil CNPJ Simples. Open-source sob licença MIT.</p>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const yearSpan = document.getElementById("year");
+      yearSpan.textContent = new Date().getFullYear();
+    });
+  </script>
+</footer>
+
 
   <script src="./scripts/animations.js"></script>
 </body>

@@ -462,60 +462,341 @@ main {
   cursor: not-allowed;
 }
 
-/* APOIE O PROJETO */
-.support p {
-  margin-bottom: var(--spacing-md);
-  font-size: 1rem;
-  color: var(--color-text);
-  text-align: left;
+/* ============================================
+   SEÇÃO DE DADOS
+   ============================================ */
+
+/* Grid de cards de estatísticas */
+.data-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
 }
 
-.support-buttons {
+/* Card individual de estatística */
+.stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
   display: flex;
-  justify-content: left;
+  align-items: center;
+  gap: 1.25rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Ícone do card */
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #d0fae5 0%, #a7f3d0 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #009866;
+}
+
+/* Conteúdo do card */
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.stat-time {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Seção de download */
+.download-section {
+  background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.download-info h4 {
+  font-size: 1.25rem;
+  color: #065f46;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.download-info p {
+  color: #047857;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+}
+
+.download-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   APOIE O PROJETO
+   ============================================ */
+.support {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.support-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.support-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.support-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #d97706;
+}
+
+.support-text {
+  flex: 1;
+}
+
+.support-text h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.support-subtitle {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.support-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.support-info h4 {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.support-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  flex-wrap: wrap;
+}
+
+.support-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.support-benefits li svg {
+  width: 20px;
+  height: 20px;
+  color: #009866;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.support-action {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Cards de ação */
+.pix-card,
+.github-card {
+  background: white;
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: all 0.3s ease;
+}
+
+.pix-card:hover,
+.github-card:hover {
+  border-color: #009866;
+  box-shadow: 0 8px 20px rgba(0, 152, 102, 0.15);
+  transform: translateY(-2px);
+}
+
+.pix-header,
+.github-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.pix-header svg {
+  width: 28px;
+  height: 28px;
+  color: #009866;
+}
+
+.github-header svg {
+  width: 28px;
+  height: 28px;
+  color: #1f2937;
+}
+
+.pix-card h4,
+.github-card h4 {
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  margin: 0;
+  font-weight: 600;
+}
+
+.pix-card p,
+.github-card p {
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .pix-button,
-.coffee-button {
-  display: inline-block;
+.github-button {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   text-decoration: none;
   background-color: #009866;
   color: #ffffff;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.5rem;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
-  font-weight: 500;
+  transition: all 0.3s ease;
+  font-weight: 600;
   border: none;
   cursor: pointer;
   font-family: inherit;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 152, 102, 0.25);
 }
 
-.coffee-button {
-  background-color: #ff813f;
+.pix-button:hover,
+.github-button:hover {
+  background-color: #007a52;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 152, 102, 0.35);
+}
+
+.pix-button svg,
+.github-button svg {
+  width: 18px;
+  height: 18px;
 }
 
 .github-button {
-  background-color: #ff813f;
+  background-color: #1f2937;
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.25);
 }
 
-.pix-button:hover {
-  background-color: #007a52;
+.github-button:hover {
+  background-color: #111827;
+  box-shadow: 0 6px 16px rgba(31, 41, 55, 0.35);
 }
 
-.coffee-button:hover {
-  background-color: #e6732e;
-}
-
-/* Mensagem do PIX com transição suave */
+/* Mensagem do PIX */
 .pix-message {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: #009866;
   font-weight: 600;
   text-align: center;
+  font-size: 0.9rem;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.pix-message.show {
+  opacity: 1;
+}
+
+.support-footer {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.support-footer p {
+  margin: 0;
+  color: #92400e;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 /* FAQ */
@@ -665,6 +946,73 @@ footer p {
   
   #baseEndpoint {
     width: 100%;
+  }
+
+  /* Stats responsivos */
+  .data-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .download-section {
+    padding: 1.5rem;
+  }
+
+  .download-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Support section responsivo */
+  .support {
+    padding: 2rem 1.5rem;
+  }
+
+  .support-header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .support-text h3 {
+    font-size: 1.75rem;
+  }
+
+  .support-subtitle {
+    font-size: 1rem;
+  }
+
+  .support-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .support-benefits {
+    gap: 0.875rem;
+  }
+
+  .support-benefits li {
+    font-size: 0.95rem;
+  }
+
+  .pix-card,
+  .github-card {
+    padding: 1.5rem;
+  }
+
+  .support-footer {
+    padding: 1.25rem;
+  }
+
+  .support-footer p {
+    font-size: 0.95rem;
   }
 
   /* Tabelas responsivas */

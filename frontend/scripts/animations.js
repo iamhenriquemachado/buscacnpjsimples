@@ -72,3 +72,10 @@ document.getElementById('testForm').addEventListener('submit', (e) => {
   const cnpj = document.getElementById('cnpjInput').value;
   alert(`Consultando CNPJ: ${cnpj}`);
 });
+
+
+function getCurrentYear() {
+  const year = new Date()
+  year.getFullYear()
+  return year
+}
