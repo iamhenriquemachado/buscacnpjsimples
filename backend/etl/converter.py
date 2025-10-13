@@ -66,7 +66,7 @@ def convert_csv_to_parquet():
         
         csv_files = [
             f for f in os.listdir(extract_dir)
-            if 'csv' in f.lower() and os.path.isfile(os.path.join(extract_dir, f))
+            if 'csv' or 'estabelec' in f.lower() and os.path.isfile(os.path.join(extract_dir, f))
 ]
         total_files = len(csv_files)
         
@@ -183,4 +183,4 @@ def convert_parquet_to_ndjson():
 
 
 if __name__ == "__main__":
-    convert_parquet_to_ndjson()
+    convert_csv_to_parquet()

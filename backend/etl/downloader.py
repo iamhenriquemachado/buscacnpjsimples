@@ -5,7 +5,6 @@ import os
 import logging
 import httpx
 import aiofiles
-from utils import rename_receita_files
 import zipfile
 
 logging.basicConfig(level=logging.INFO)
@@ -122,7 +121,6 @@ async def download_all_async():
         
         logging.info("🔄 Renomeando arquivos CSV...")
         renamed_files = await asyncio.to_thread(
-            rename_receita_files, 
             extract_dir,  
             False  
         )
