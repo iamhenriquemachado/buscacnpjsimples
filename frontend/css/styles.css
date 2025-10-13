@@ -1055,3 +1055,353 @@ footer p {
       white-space: nowrap;
   }
 }
+
+/* ============================================
+    MODAL CNPJ
+    ============================================ */
+
+/* Overlay do modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Container do modal */
+.modal-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Header do modal */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(135deg, #d0fae5 0%, #a7f3d0 100%);
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #009866 0%, #007a52 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 152, 102, 0.25);
+}
+
+.modal-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #065f46;
+  margin: 0;
+}
+
+.modal-close {
+  background: white;
+  border: 1px solid #a7f3d0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.modal-close:hover {
+  background: #f0fdf4;
+  border-color: #009866;
+  transform: rotate(90deg);
+}
+
+.modal-close svg {
+  width: 20px;
+  height: 20px;
+  color: #047857;
+}
+
+/* Corpo do modal */
+.modal-body {
+  padding: 2rem;
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.status-badge.active {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status-badge.inactive {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.status-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Grid de dados */
+.modal-data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.data-label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.data-value {
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.data-value.empty {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Separador de seções */
+.modal-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  margin: 2rem 0;
+}
+
+/* Loading state */
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #d1fae5;
+  border-top-color: #009866;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.modal-loading-text {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Error state */
+.modal-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+}
+
+.modal-error-icon {
+  width: 56px;
+  height: 56px;
+  background: #dc2626;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-error-icon svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.modal-error-text {
+  text-align: center;
+  color: #991b1b;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Footer do modal */
+.modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-button-primary {
+  background: linear-gradient(135deg, #009866 0%, #007a52 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 152, 102, 0.25);
+}
+
+.modal-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 152, 102, 0.35);
+}
+
+.modal-button-secondary {
+  background: white;
+  color: #374151;
+  border: 1px solid var(--color-border);
+}
+
+.modal-button-secondary:hover {
+  background: #f9fafb;
+  border-color: #009866;
+}
+
+.modal-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Responsividade do modal */
+@media (max-width: 600px) {
+  .modal-container {
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+
+  .modal-data-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .modal-footer {
+    padding: 1.25rem 1.5rem;
+    flex-direction: column;
+  }
+
+  .modal-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-loading {
+    padding: 2rem 1.5rem;
+  }
+}
