@@ -88,10 +88,6 @@ def query_ndjson_with_joins(cnpj_prefix=None):
 
 
 def build_join_query(cnpj_prefix=None):
-    """
-    Constrói a query SQL com JOINs entre as tabelas.
-    Similar ao exemplo em C# que você forneceu.
-    """
     
     where_clause = f"WHERE e.cnpj_prefix = '{cnpj_prefix}'" if cnpj_prefix else ""
     
