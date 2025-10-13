@@ -80,7 +80,7 @@ async def download_all_async():
     if not download_dir:
         return None
 
-    current_date = '2025-09'  # datetime.now().strftime('%Y-%m')
+    current_date = datetime.now().strftime('%Y-%m')
     base_url = f'https://arquivos.receitafederal.gov.br/dados/cnpj/dados_abertos_cnpj/{current_date}/'
 
     async with httpx.AsyncClient(timeout=httpx.Timeout(600.0, read=600.0)) as client:

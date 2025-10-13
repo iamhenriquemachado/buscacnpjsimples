@@ -58,6 +58,7 @@ def sanitize_filename(filename):
     return f"arquivo_{clean_name}.parquet"
 
 
+
 def convert_csv_to_parquet():
     try:
         extract_dir = 'backend/etl/extract/'
@@ -73,7 +74,7 @@ def convert_csv_to_parquet():
             logging.warning("⚠️ Nenhum arquivo CSV encontrado para converter.")
             return
         
-        logging.info(f"📁 Encontrados {total_files} arquivo(s) CSV para converter.")
+        logging.info(f"📁 Encontrados {total_files} arquivo(s) CSV para converter no diretório {extract_dir}.")
         
         conn = duckdb.connect()
         conn.execute("SET threads TO 8;")
@@ -122,5 +123,64 @@ def convert_csv_to_parquet():
         return None
 
 
+def convert_parquet_to_ndjson():
+    parquet_dir = 'backend/etl/parquet'
+    ndjson_dir = 'backend/etl/ndjson'
+
+    os.makedirs(ndjson_dir, exist_ok=True)
+
+    parquet_files = [
+        f for f in os.listdir(parquet_dir)
+        if f.lower().endswith('.parquet') and os.path.isfile(os.path.join(parquet_dir, f))
+    ]
+
+    total_files = len(parquet_files)
+
+    if not parquet_files:
+        logging.warning("⚠️ Nenhum arquivo PARQUET encontrado para converter.")
+        return []
+
+    logging.info(f"📁 Encontrados {total_files} arquivo(s) PARQUET para converter no diretório {parquet_dir}")
+
+    conn = duckdb.connect()
+    conn.execute("SET threads TO 8;")
+    conn.execute("SET memory_limit = '8GB';")
+    conn.execute("SET temp_directory = '/tmp/duckdb_temp';")
+
+    converted_files = []
+
+    for idx, filename in enumerate(parquet_files, 1):
+        parquet_path = os.path.join(parquet_dir, filename)
+
+        # Remove .parquet, limpa e adiciona extensão correta
+        base_name = os.path.splitext(filename)[0]
+        ndjson_name = f"{base_name}.ndjson"
+        ndjson_path = os.path.join(ndjson_dir, ndjson_name)
+
+        try:
+            logging.info(f"⚙️ [{idx}/{total_files}] Convertendo '{filename}' → '{ndjson_name}'")
+
+            conn.execute(f"""
+                COPY (
+                    SELECT * FROM read_parquet('{parquet_path}')
+                )
+                TO '{ndjson_path}' (
+                    FORMAT JSON,
+                    ARRAY TRUE
+                );
+            """)
+
+            converted_files.append(ndjson_name)
+
+        except Exception as e:
+            logging.error(f"❌ Erro ao converter '{filename}': {e}")
+            continue
+
+    conn.close()
+    logging.info(f"🎉 Conversão concluída! {len(converted_files)}/{total_files} arquivo(s) convertidos com sucesso.")
+    return converted_files
+
+
+
 if __name__ == "__main__":
-    convert_csv_to_parquet()
+    convert_parquet_to_ndjson()

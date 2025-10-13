@@ -11,3 +11,5 @@ api/services/**/__pycache__/
 **/extract
 /__parquet__
 **/parquet
+/__ndjson__
+**/ndjson
