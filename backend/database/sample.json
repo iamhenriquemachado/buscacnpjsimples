@@ -1,0 +1,72 @@
+{
+  "cnpj": "00000000000000",
+  "razao_social": "EMPRESA EXEMPLO LTDA",
+  "nome_fantasia": "EXEMPLO",
+  "matriz_filial": "Matriz",
+  "situacao_cadastral": "Ativa",
+  "data_situacao_cadastral": "2000-01-01",
+  "motivo_situacao_cadastral": null,
+  "data_inicio_atividade": "2000-01-01",
+  
+  "cnae_principal": "4711302 - Comércio varejista de mercadorias em geral",
+  "cnaes_secundarios": [
+    "4729601 - Comércio varejista de bebidas",
+    "4781400 - Comércio varejista de artigos do vestuário"
+  ],
+  "cnaes_secundarios_count": 2,
+
+  "natureza_juridica": "2062 - Sociedade Empresária Limitada",
+  "qualificacao_responsavel": "49 - Sócio-Administrador",
+  "capital_social": "1000,00",
+  "porte_empresa": "Microempresa (ME)",
+  "ente_federativo_responsavel": null,
+
+  "logradouro": "RUA EXEMPLO",
+  "numero": "123",
+  "complemento": "SALA 1",
+  "bairro": "BAIRRO EXEMPLO",
+  "cep": "00000000",
+  "municipio": "SAO PAULO",
+  "uf": "SP",
+  "pais": "BRASIL",
+
+  "email": "contato@exemplo.com",
+  "telefones": [
+    { "ddd": "11", "numero": "900000000", "is_fax": false }
+  ],
+
+  "situacao_especial": null,
+  "data_situacao_especial": null,
+
+  "opcao_simples": true,
+  "data_opcao_simples": "2011-01-01",
+  "data_exclusao_simples": null,
+  "opcao_mei": false,
+  "data_opcao_mei": null,
+  "data_exclusao_mei": null,
+
+  "QSA": [
+    {
+      "nome_socio": "SOCIO PJ EXEMPLO",
+      "cnpj_cpf_socio": "00000000000000",
+      "identificador_socio": "Pessoa Jurídica",
+      "qualificacao_socio": "Sócio Pessoa Jurídica",
+      "data_entrada_sociedade": "2000-01-01",
+      "pais_socio": "BRASIL",
+      "representante_legal": null,
+      "qualificacao_representante": null,
+      "faixa_etaria": "Não se aplica"
+    },
+    {
+      "nome_socio": "SOCIA PF EXEMPLO",
+      "cnpj_cpf_socio": "***000000**",
+      "identificador_socio": "Pessoa Física",
+      "qualificacao_socio": "Administrador",
+      "data_entrada_sociedade": "2000-01-01",
+      "pais_socio": "BRASIL",
+      "representante_legal": "JOÃO ADMINISTRADOR",
+      "qualificacao_representante": "Administrador",
+      "faixa_etaria": "31 a 40 anos"
+    }
+  ]
+}
