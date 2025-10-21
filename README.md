@@ -5,7 +5,6 @@
 </p>
 
 
-<a align="center" href="www.buscacnpjsimples.com.br">Website</a>
 
 
 ## Comece por aqui 
@@ -17,5 +16,15 @@ O projeto tem uma estrutura simples e enxuta que conta as seguintes pastas:
 - `frontend`: Página simples e estática em HTML que viabiliza a consulta da documentação e chamadas a API. 
 
 ## Por que eu criei este projeto? 
-- Este projeto iniciou-se como inspiração em diversos projetos que vi no LinkedIn, mas especicamente o projeto [OpenCnpj](https://github.com/Hitmasu/OpenCNPJ). A ideia era fazer algo desafiador e útil para a comunidade e desenvolvedores, enquanto eu melhorava minhas habilidades. 
+- Este projeto iniciou-se como inspiração em diversos projetos que vi no LinkedIn, mas especicamente o projeto [OpenCnpj](https://github.com/Hitmasu/OpenCNPJ). A ideia era fazer algo desafiador e útil para a comunidade e desenvolvedores, enquanto eu melhorava minhas habilidades em Python e banco de dados. 
+- Inicialmente, começou mais descobrindo como baixar arquivos, processar grandes volumes de dados e com o tempo evoluiu para algo disponível para toda a comunidade. 
 
+## Como executar o projeto? 
+
+
+
+## Contribuição
+- Suas contribuições fazem com que o projeto cresça e melhore cada vez mais. Essas são as formas que você pode contribuir:
+1. Dê uma estrela no projeto (o que ajuda ele ser divulgado para toda a comunidade e se tornar mais relevante) ⭐
+2. Caso queira discutir mudanças/melhorias, abra um issue. 
+3. Faça um fork para correção de bugs com a descrição clara e envie um Pull Request. 
