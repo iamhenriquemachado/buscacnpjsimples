@@ -23,8 +23,12 @@ O projeto tem uma estrutura simples e enxuta que conta as seguintes pastas:
 
 
 
-## Contribuição
-- Suas contribuições fazem com que o projeto cresça e melhore cada vez mais. Essas são as formas que você pode contribuir:
-1. Dê uma estrela no projeto (o que ajuda ele ser divulgado para toda a comunidade e se tornar mais relevante) ⭐
-2. Caso queira discutir mudanças/melhorias, abra um issue. 
-3. Faça um fork para correção de bugs com a descrição clara e envie um Pull Request. 
+## Como Contribuir
+
+Toda contribuição é bem-vinda! 
+
+Existem três formas principais de ajudar:
+
+* ⭐ **Dê uma Estrela:** Ajuda o projeto a ganhar visibilidade.
+* 💡 **Abra uma Issue:** Se você tem uma sugestão, quer reportar um bug ou iniciar uma discussão.
+* 🛠️ **Envie um Pull Request:** Para correções de bugs ou adição de novas funcionalidades.
